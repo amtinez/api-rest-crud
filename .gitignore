@@ -32,3 +32,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### MAC ###
+.DS_Store
+
+### Docker Data ###
+docker-data/*
