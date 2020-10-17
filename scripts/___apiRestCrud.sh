@@ -8,7 +8,7 @@ echo "4. Start the server"
 echo "5. Compile and start the server"
 echo "0. Exit"
 
-PROJECT_PATH=~/personal/api-rest-crud/
+PROJECT_PATH=~/personal/api-rest-crud
 
 while :
 do
@@ -26,7 +26,7 @@ do
 			;;
 		2)
 			echo "Starting docker containers..."
-			cd $PROJECT_PATH/docker/mysql && docker-compose up -d
+			cd $PROJECT_PATH/docker/ && docker-compose up -d
 			break
 			;;
 		3)
