@@ -24,3 +24,6 @@ echo "0. Exit"
 
 PROJECT_PATH=~/personal/api-rest-crud/
 ```
+
+## EER Diagram
+ ![EER Diagram](database/EER-DIAGRAM.png)
