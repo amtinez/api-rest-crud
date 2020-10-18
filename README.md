@@ -26,4 +26,4 @@ PROJECT_PATH=~/personal/api-rest-crud/
 ```
 
 ## EER Diagram
- ![EER Diagram](database/EER-DIAGRAM.png)
+ ![EER Diagram](database/EER-Diagram.png)
