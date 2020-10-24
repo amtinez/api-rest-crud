@@ -4,12 +4,10 @@ import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.User;
 import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.UsersAuthorities;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -83,7 +81,7 @@ public class UserModel implements UserDetails {
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Set<AuthorityModel> getAuthorities() {
         return this.authorities;
     }
 

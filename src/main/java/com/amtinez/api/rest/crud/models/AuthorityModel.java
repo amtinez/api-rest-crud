@@ -36,8 +36,8 @@ public class AuthorityModel implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = Authority.AUTHORITY_FIELD, length = Authority.AUTHORITY_FIELD_LENGTH)
-    private String authority;
+    @Column(name = Authority.NAME_FIELD, length = Authority.NAME_FIELD_LENGTH)
+    private String name;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = UsersAuthorities.TABLE_NAME, catalog = DATABASE_NAME, joinColumns = {
@@ -45,4 +45,8 @@ public class AuthorityModel implements GrantedAuthority {
         @JoinColumn(name = UsersAuthorities.ID_USER_FIELD, nullable = false, updatable = false)})
     private Set<UserModel> users = new HashSet<>(0);
 
+    @Override
+    public String getAuthority() {
+        return this.name;
+    }
 }
