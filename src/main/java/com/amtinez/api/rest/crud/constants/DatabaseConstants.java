@@ -25,7 +25,7 @@ public class DatabaseConstants {
             public static final String DELETE_DATE_FIELD = "delete_date";
             public static final String LAST_ACCESS_DATE_FIELD = "last_access_date";
             public static final String LAST_UPDATE_DATE_FIELD = "last_update_date";
-            public static final String PASSWORD_UPDATE_DATE_FIELD = "last_update_date";
+            public static final String PASSWORD_UPDATE_DATE_FIELD = "password_update_date";
             public static final String ENABLED_FIELD = "enabled";
 
             private User() {
@@ -36,8 +36,8 @@ public class DatabaseConstants {
         public static class Authority {
 
             public static final String TABLE_NAME = "authorities";
-            public static final String AUTHORITY_FIELD = "authority";
-            public static final int AUTHORITY_FIELD_LENGTH = 50;
+            public static final String NAME_FIELD = "name";
+            public static final int NAME_FIELD_LENGTH = 50;
 
             private Authority() {
 
