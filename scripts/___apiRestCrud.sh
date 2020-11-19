@@ -22,11 +22,13 @@ do
 		1)
 			echo "Removing docker containers..."
 			docker rm arc-mysql -f
+			docker rm arc-mysql-test -f
 			break
 			;;
 		2)
 			echo "Starting docker containers..."
-			cd $PROJECT_PATH/docker/ && docker-compose up -d
+			cd $PROJECT_PATH/docker/mysql && docker-compose up -d
+			cd $PROJECT_PATH/docker/mysql-test && docker-compose up -d
 			break
 			;;
 		3)
