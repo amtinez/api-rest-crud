@@ -26,4 +26,4 @@ PROJECT_PATH=~/personal/api-rest-crud/
 ```
 
 ## EER Diagram
- ![EER Diagram](database/EER-Diagram.png)
+ ![EER Diagram](docker/mysql/EER-Diagram.png)

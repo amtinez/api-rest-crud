@@ -1,10 +1,6 @@
 SET character_set_client = utf8mb4;
 
-DROP TABLE IF EXISTS `users_authorities`;
-DROP TABLE IF EXISTS `authorities`;
-DROP TABLE IF EXISTS `users`;
-
-CREATE TABLE `users`
+CREATE TABLE IF NOT EXISTS `users`
 (
     `id`                   BIGINT      NOT NULL AUTO_INCREMENT,
     `first_name`           VARCHAR(50) NOT NULL,
@@ -24,7 +20,7 @@ CREATE TABLE `users`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
-CREATE TABLE `authorities`
+CREATE TABLE IF NOT EXISTS `authorities`
 (
     `id`   BIGINT      NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
@@ -33,7 +29,7 @@ CREATE TABLE `authorities`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
-CREATE TABLE `users_authorities`
+CREATE TABLE IF NOT EXISTS `users_authorities`
 (
     `id_user`      BIGINT NOT NULL,
     `id_authority` BIGINT NOT NULL,

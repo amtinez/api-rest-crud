@@ -5,7 +5,7 @@ services:
     container_name: arc-mysql
     image: mysql
     environment:
-      MYSQL_DATABASE: api-rest-crud
+      MYSQL_DATABASE: api_rest_crud
       MYSQL_USER: amtinez
       MYSQL_PASSWORD: apirestcrud
       MYSQL_ROOT_PASSWORD: rootapirestcrud
@@ -21,3 +21,4 @@ services:
       timeout: 3s
     volumes:
     - /Users/almartinez/personal/api-rest-crud/docker-data/mysql:/var/lib/mysql
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
