@@ -5,13 +5,11 @@ package com.amtinez.api.rest.crud.constants;
  */
 public class DatabaseConstants {
 
-    public static final String DATABASE_NAME = "api-rest-crud";
-
     public static class Table {
 
         public static class User {
 
-            public static final String TABLE_NAME = "user";
+            public static final String TABLE_NAME = "users";
             public static final String FIRST_NAME_FIELD = "first_name";
             public static final int FIRST_NAME_FIELD_LENGTH = 50;
             public static final String LAST_NAME_FIELD = "last_name";
