@@ -22,7 +22,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import static com.amtinez.api.rest.crud.constants.DatabaseConstants.DATABASE_NAME;
 import static com.amtinez.api.rest.crud.constants.SecurityConstants.INACTIVE_LIFETIME_MONTHS;
 import static com.amtinez.api.rest.crud.constants.SecurityConstants.PASSWORD_LIFETIME_MONTHS;
 
@@ -32,8 +31,7 @@ import static com.amtinez.api.rest.crud.constants.SecurityConstants.PASSWORD_LIF
 @Getter
 @Setter
 @Entity
-@Table(name = User.TABLE_NAME,
-       catalog = DATABASE_NAME)
+@Table(name = User.TABLE_NAME)
 public class UserModel implements UserDetails {
 
     @Id
@@ -74,7 +72,7 @@ public class UserModel implements UserDetails {
     private Boolean enabled;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = UsersAuthorities.TABLE_NAME, catalog = DATABASE_NAME, joinColumns = {
+    @JoinTable(name = UsersAuthorities.TABLE_NAME, joinColumns = {
         @JoinColumn(name = UsersAuthorities.ID_USER_FIELD, nullable = false, updatable = false)}, inverseJoinColumns = {
         @JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD, nullable = false, updatable = false)})
     private Set<AuthorityModel> authorities = new HashSet<>(0);
