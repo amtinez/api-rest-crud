@@ -20,16 +20,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import static com.amtinez.api.rest.crud.constants.DatabaseConstants.DATABASE_NAME;
-
 /**
  * @author amartinezcerro@gmail.com
  */
 @Getter
 @Setter
 @Entity
-@Table(name = Authority.TABLE_NAME,
-       catalog = DATABASE_NAME)
+@Table(name = Authority.TABLE_NAME)
 public class AuthorityModel implements GrantedAuthority {
 
     @Id
@@ -40,7 +37,7 @@ public class AuthorityModel implements GrantedAuthority {
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = UsersAuthorities.TABLE_NAME, catalog = DATABASE_NAME, joinColumns = {
+    @JoinTable(name = UsersAuthorities.TABLE_NAME, joinColumns = {
         @JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD, nullable = false, updatable = false)}, inverseJoinColumns = {
         @JoinColumn(name = UsersAuthorities.ID_USER_FIELD, nullable = false, updatable = false)})
     private Set<UserModel> users = new HashSet<>(0);
