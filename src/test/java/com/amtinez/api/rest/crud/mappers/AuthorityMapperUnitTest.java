@@ -40,7 +40,7 @@ public class AuthorityMapperUnitTest {
 
     @Test
     public void modelToDto() {
-        Authority authority = mapper.authorityModelToAuthority(authorityModel);
+        final Authority authority = mapper.authorityModelToAuthority(authorityModel);
         assertEquals(AUTHORITY_ID, authority.getId());
         assertEquals(AUTHORITY_NAME, authority.getName());
     }
@@ -52,7 +52,7 @@ public class AuthorityMapperUnitTest {
 
     @Test
     public void dtoToModel() {
-        AuthorityModel authorityModel = mapper.authorityToAuthorityModel(authority);
+        final AuthorityModel authorityModel = mapper.authorityToAuthorityModel(authority);
         assertEquals(AUTHORITY_ID, authorityModel.getId());
         assertEquals(AUTHORITY_NAME, authorityModel.getName());
     }
