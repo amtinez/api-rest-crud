@@ -27,7 +27,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 @ActiveProfiles(Profiles.TEST)
 @Transactional
-public class AuthorityServiceImplIntegrationTest {
+public class AuthorityServiceIntegrationTest {
 
     //TODO - IN OTHER TASK - MORE TEST - DATABASE VALIDATIONS
 
