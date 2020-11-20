@@ -11,32 +11,32 @@ import java.util.Optional;
 public interface AuthorityService {
 
     /**
-     * Retrieves the authority with the given id
+     * Retrieves the authority model with the given id
      *
-     * @param id the id of the authority
-     * @return the authority if found
+     * @param id the id of the authority model
+     * @return the authority model if found
      */
     Optional<AuthorityModel> findAuthority(final Long id);
 
     /**
-     * Retrieves the list of all authorities
+     * Retrieves the list of all authority models
      *
-     * @return the list of all authorities
+     * @return the list of all authority models
      */
     List<AuthorityModel> findAllAuthorities();
 
     /**
-     * Save the authority
+     * Save the authority model
      *
-     * @param authorityModel the authority
-     * @return the saved authority
+     * @param authorityModel the authority model
+     * @return the saved authority model
      */
     AuthorityModel saveAuthority(final AuthorityModel authorityModel);
 
     /**
-     * Remove the authority with the given id
+     * Remove the authority model with the given id
      *
-     * @param id the id of the authority
+     * @param id the id of the authority model
      */
     void removeAuthority(final Long id);
 
