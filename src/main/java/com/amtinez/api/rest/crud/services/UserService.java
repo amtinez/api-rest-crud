@@ -12,32 +12,32 @@ import java.util.Optional;
 public interface UserService extends UserDetailsService {
 
     /**
-     * Retrieves the user with the given id
+     * Retrieves the user model with the given id
      *
-     * @param id the id of the user
-     * @return the user if found
+     * @param id the id of the user model
+     * @return the user model if found
      */
     Optional<UserModel> findUser(final Long id);
 
     /**
-     * Retrieves the list of all users
+     * Retrieves the list of all user models
      *
-     * @return the list of all users
+     * @return the list of all user models
      */
     List<UserModel> findAllUsers();
 
     /**
-     * Save the user
+     * Save the user model
      *
-     * @param userModel the user
-     * @return the saved user
+     * @param userModel the user model
+     * @return the saved user model
      */
     UserModel saveUser(final UserModel userModel);
 
     /**
-     * Remove the user with the given id
+     * Remove the user model with the given id
      *
-     * @param id the id of the user
+     * @param id the id of the user model
      */
     void removeUser(final Long id);
 

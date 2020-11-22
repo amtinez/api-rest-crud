@@ -30,7 +30,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 @ActiveProfiles(Profiles.TEST)
 @Transactional
-public class UserServiceImplIntegrationTest {
+public class UserServiceIntegrationTest {
 
     //TODO - IN OTHER TASK - MORE TEST - DATABASE VALIDATIONS
 
@@ -40,10 +40,10 @@ public class UserServiceImplIntegrationTest {
     private static final String EXISTING_EMAIL = "user@one.com";
     private static final int EXISTING_USERS_SIZE = 2;
 
-    private static final String FIRST_NAME = "User_Test_First_Name";
-    private static final String LAST_NAME = "User_Test_Last_Name";
+    private static final String FIRST_NAME = "userTestFirstName";
+    private static final String LAST_NAME = "userTestLastName";
     private static final String EMAIL = "user@test.com";
-    private static final String PASSWORD = "user_test_password";
+    private static final String PASSWORD = "userTestPassword";
 
     @Resource
     private UserService userService;
@@ -65,29 +65,34 @@ public class UserServiceImplIntegrationTest {
 
     @Test
     public void testSaveUser() {
-        final UserModel userModel = new UserModel();
         final LocalDateTime localDateTimeNow = LocalDateTime.now();
-        userModel.setFirstName(FIRST_NAME);
-        userModel.setLastName(LAST_NAME);
-        userModel.setEmail(EMAIL);
-        userModel.setEnabled(Boolean.TRUE);
-        userModel.setPassword(PASSWORD);
-        userModel.setBirthdayDate(localDateTimeNow);
-        userModel.setRegisterDate(localDateTimeNow);
-        userModel.setLastAccessDate(localDateTimeNow);
-        userModel.setPasswordUpdateDate(localDateTimeNow);
+        final UserModel userModel = UserModel.builder()
+                                             .firstName(FIRST_NAME)
+                                             .lastName(LAST_NAME)
+                                             .email(EMAIL)
+                                             .password(PASSWORD)
+                                             .birthdayDate(localDateTimeNow)
+                                             .lastAccessDate(localDateTimeNow)
+                                             .lastPasswordUpdateDate(localDateTimeNow)
+                                             .enabled(Boolean.FALSE)
+                                             .build();
         final UserModel userModelSaved = userService.saveUser(userModel);
         assertNotNull(userModelSaved);
         assertNotNull(userModelSaved.getId());
         assertEquals(FIRST_NAME, userModelSaved.getFirstName());
         assertEquals(LAST_NAME, userModelSaved.getLastName());
         assertEquals(EMAIL, userModelSaved.getEmail());
-        assertEquals(Boolean.TRUE, userModelSaved.getEnabled());
+        assertFalse(userModelSaved.isEnabled());
         assertEquals(PASSWORD, userModelSaved.getPassword());
         assertEquals(localDateTimeNow, userModelSaved.getBirthdayDate());
-        assertEquals(localDateTimeNow, userModelSaved.getRegisterDate());
         assertEquals(localDateTimeNow, userModelSaved.getLastAccessDate());
-        assertEquals(localDateTimeNow, userModelSaved.getPasswordUpdateDate());
+        assertEquals(localDateTimeNow, userModelSaved.getLastPasswordUpdateDate());
+        assertNotNull(userModelSaved.getCreatedBy());
+        assertNotNull(userModelSaved.getCreatedDate());
+        assertNotNull(userModelSaved.getLastUpdatedBy());
+        assertNotNull(userModelSaved.getLastUpdatedDate());
+        assertNull(userModelSaved.getDeletedBy());
+        assertNull(userModelSaved.getDeletedDate());
     }
 
     @Test

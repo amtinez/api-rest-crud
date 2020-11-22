@@ -2,7 +2,10 @@ package com.amtinez.api.rest.crud.models;
 
 import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.User;
 import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.UsersAuthorities;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,7 +16,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,11 +30,14 @@ import static com.amtinez.api.rest.crud.constants.SecurityConstants.PASSWORD_LIF
 /**
  * @author amartinezcerro@gmail.com
  */
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = User.TABLE_NAME)
-public class UserModel implements UserDetails {
+public class UserModel extends Auditable<String> implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,30 +58,20 @@ public class UserModel implements UserDetails {
     @Column(name = User.BIRTHDAY_DATE_FIELD, nullable = false)
     private LocalDateTime birthdayDate;
 
-    @Column(name = User.REGISTER_DATE_FIELD, nullable = false)
-    private LocalDateTime registerDate;
-
-    @Column(name = User.DELETE_DATE_FIELD)
-    private LocalDateTime deleteDate;
-
-    @Column(name = User.LAST_ACCESS_DATE_FIELD, nullable = false)
+    @Column(name = User.LAST_ACCESS_DATE_FIELD)
     private LocalDateTime lastAccessDate;
 
-    @Column(name = User.LAST_UPDATE_DATE_FIELD)
-    private LocalDateTime lastUpdateDate;
-
-    @Column(name = User.PASSWORD_UPDATE_DATE_FIELD, nullable = false)
-    private LocalDateTime passwordUpdateDate;
+    @Column(name = User.LAST_PASSWORD_UPDATE_DATE_FIELD)
+    private LocalDateTime lastPasswordUpdateDate;
 
     @Column(name = User.ENABLED_FIELD, nullable = false)
     private Boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = UsersAuthorities.TABLE_NAME, joinColumns = {
-        @JoinColumn(name = UsersAuthorities.ID_USER_FIELD, nullable = false, updatable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD, nullable = false, updatable = false)})
+    @ManyToMany
+    @JoinTable(name = UsersAuthorities.TABLE_NAME,
+               joinColumns = {@JoinColumn(name = UsersAuthorities.ID_USER_FIELD)},
+               inverseJoinColumns = {@JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD)})
     private Set<AuthorityModel> authorities = new HashSet<>(0);
-
 
     @Override
     public Set<AuthorityModel> getAuthorities() {
@@ -95,16 +90,17 @@ public class UserModel implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.deleteDate == null;
+        return this.deletedDate == null;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return ChronoUnit.MONTHS.between(this.passwordUpdateDate, LocalDateTime.now()) < PASSWORD_LIFETIME_MONTHS;
+        return ChronoUnit.MONTHS.between(this.lastPasswordUpdateDate, LocalDateTime.now()) < PASSWORD_LIFETIME_MONTHS;
     }
 
     @Override
     public boolean isEnabled() {
         return this.enabled;
     }
+
 }

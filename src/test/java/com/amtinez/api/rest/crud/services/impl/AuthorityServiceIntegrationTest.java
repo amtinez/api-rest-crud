@@ -56,8 +56,9 @@ public class AuthorityServiceIntegrationTest {
 
     @Test
     public void testSaveAuthority() {
-        final AuthorityModel authorityModel = new AuthorityModel();
-        authorityModel.setName(NAME);
+        final AuthorityModel authorityModel = AuthorityModel.builder()
+                                                            .name(NAME)
+                                                            .build();
         final AuthorityModel authorityModelSaved = authorityService.saveAuthority(authorityModel);
         assertNotNull(authorityModelSaved);
         assertNotNull(authorityModelSaved.getId());
