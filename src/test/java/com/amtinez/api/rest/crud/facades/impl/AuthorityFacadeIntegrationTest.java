@@ -56,8 +56,9 @@ public class AuthorityFacadeIntegrationTest {
 
     @Test
     public void testSaveAuthority() {
-        final Authority authority = new Authority();
-        authority.setName(NAME);
+        final Authority authority = Authority.builder()
+                                             .name(NAME)
+                                             .build();
         final Authority authoritySaved = authorityFacade.saveAuthority(authority);
         assertNotNull(authoritySaved);
         assertNotNull(authoritySaved.getId());
