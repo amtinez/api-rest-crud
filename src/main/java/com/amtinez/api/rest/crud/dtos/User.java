@@ -23,6 +23,7 @@ public class User extends Auditable<String> {
     private String email;
     private String password;
     private LocalDateTime birthdayDate;
+    private Boolean enabled;
     private Set<Authority> authorities;
 
 }
