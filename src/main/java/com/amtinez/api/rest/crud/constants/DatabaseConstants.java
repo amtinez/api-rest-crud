@@ -19,6 +19,7 @@ public class DatabaseConstants {
             public static final String PASSWORD_FIELD = "password";
             public static final int PASSWORD_FIELD_LENGTH = 80;
             public static final String BIRTHDAY_DATE_FIELD = "birthday_date";
+            public static final String LOCKED_AT_FIELD = "locked_at";
             public static final String LAST_ACCESS_DATE_FIELD = "last_access_at";
             public static final String LAST_PASSWORD_UPDATE_DATE_FIELD = "last_password_update_at";
             public static final String ENABLED_FIELD = "enabled";
@@ -53,8 +54,6 @@ public class DatabaseConstants {
             public static final String CREATED_AT_FIELD = "created_at";
             public static final String LAST_UPDATED_BY_FIELD = "last_updated_by";
             public static final String LAST_UPDATED_AT_FIELD = "last_updated_at";
-            public static final String DELETED_BY_FIELD = "deleted_by";
-            public static final String DELETED_AT_FIELD = "deleted_at";
 
             private Auditable() {
             }

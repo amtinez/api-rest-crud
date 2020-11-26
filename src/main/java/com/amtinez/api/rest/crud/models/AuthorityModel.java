@@ -32,7 +32,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = Authority.TABLE_NAME)
-public class AuthorityModel extends Auditable<String> implements GrantedAuthority {
+public class AuthorityModel extends AuditableModel<String> implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
