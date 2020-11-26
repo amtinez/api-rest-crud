@@ -53,7 +53,7 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public void deleteUser(final Long id) {
-        userService.removeUser(id);
+        userService.deleteUser(id);
     }
 
     @Override

@@ -67,7 +67,7 @@ public class AuthorityFacadeIntegrationTest {
 
     @Test
     public void testDeleteAuthority() {
-        authorityFacade.removeAuthority(EXISTING_ID);
+        authorityFacade.deleteAuthority(EXISTING_ID);
         assertTrue(authorityFacade.findAuthority(EXISTING_ID).isEmpty());
     }
 

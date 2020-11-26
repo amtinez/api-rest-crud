@@ -34,10 +34,10 @@ public interface AuthorityService {
     AuthorityModel saveAuthority(final AuthorityModel authorityModel);
 
     /**
-     * Remove the authority model with the given id
+     * Delete the authority model with the given id
      *
      * @param id the id of the authority model
      */
-    void removeAuthority(final Long id);
+    void deleteAuthority(final Long id);
 
 }
