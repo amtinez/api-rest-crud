@@ -85,14 +85,13 @@ public class UserServiceIntegrationTest {
         assertFalse(userModelSaved.isEnabled());
         assertEquals(PASSWORD, userModelSaved.getPassword());
         assertEquals(localDateTimeNow, userModelSaved.getBirthdayDate());
+        assertNull(userModelSaved.getLockedDate());
         assertEquals(localDateTimeNow, userModelSaved.getLastAccessDate());
         assertEquals(localDateTimeNow, userModelSaved.getLastPasswordUpdateDate());
         assertNotNull(userModelSaved.getCreatedBy());
         assertNotNull(userModelSaved.getCreatedDate());
         assertNotNull(userModelSaved.getLastUpdatedBy());
         assertNotNull(userModelSaved.getLastUpdatedDate());
-        assertNull(userModelSaved.getDeletedBy());
-        assertNull(userModelSaved.getDeletedDate());
     }
 
     @Test
