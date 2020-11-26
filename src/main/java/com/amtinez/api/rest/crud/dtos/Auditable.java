@@ -16,7 +16,5 @@ public abstract class Auditable<U> {
     protected LocalDateTime createdDate;
     protected U lastUpdatedBy;
     protected LocalDateTime lastUpdatedDate;
-    protected U deletedBy;
-    protected LocalDateTime deletedDate;
 
 }
