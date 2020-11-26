@@ -35,7 +35,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    public void removeAuthority(final Long id) {
+    public void deleteAuthority(final Long id) {
         authorityDao.deleteById(id);
     }
 

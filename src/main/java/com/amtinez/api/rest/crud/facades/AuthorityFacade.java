@@ -34,10 +34,10 @@ public interface AuthorityFacade {
     Authority saveAuthority(final Authority authority);
 
     /**
-     * Remove the authority with the given id
+     * Delete the authority with the given id
      *
      * @param id the id of the authority
      */
-    void removeAuthority(final Long id);
+    void deleteAuthority(final Long id);
 
 }

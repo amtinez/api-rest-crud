@@ -40,8 +40,8 @@ public class AuthorityFacadeImpl implements AuthorityFacade {
     }
 
     @Override
-    public void removeAuthority(final Long id) {
-        authorityService.removeAuthority(id);
+    public void deleteAuthority(final Long id) {
+        authorityService.deleteAuthority(id);
     }
 
 }

@@ -97,7 +97,7 @@ public class UserServiceIntegrationTest {
 
     @Test
     public void testDeleteUser() {
-        userService.removeUser(EXISTING_ID);
+        userService.deleteUser(EXISTING_ID);
         assertTrue(userService.findUser(EXISTING_ID).isEmpty());
     }
 

@@ -67,7 +67,7 @@ public class AuthorityServiceIntegrationTest {
 
     @Test
     public void testDeleteAuthority() {
-        authorityService.removeAuthority(EXISTING_ID);
+        authorityService.deleteAuthority(EXISTING_ID);
         assertTrue(authorityService.findAuthority(EXISTING_ID).isEmpty());
     }
 

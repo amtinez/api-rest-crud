@@ -35,10 +35,10 @@ public interface UserService extends UserDetailsService {
     UserModel saveUser(final UserModel userModel);
 
     /**
-     * Remove the user model with the given id
+     * Delete the user model with the given id
      *
      * @param id the id of the user model
      */
-    void removeUser(final Long id);
+    void deleteUser(final Long id);
 
 }
