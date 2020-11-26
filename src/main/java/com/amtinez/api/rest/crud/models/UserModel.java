@@ -37,7 +37,7 @@ import static com.amtinez.api.rest.crud.constants.SecurityConstants.PASSWORD_LIF
 @AllArgsConstructor
 @Entity
 @Table(name = User.TABLE_NAME)
-public class UserModel extends Auditable<String> implements UserDetails {
+public class UserModel extends AuditableModel<String> implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,6 +57,10 @@ public class UserModel extends Auditable<String> implements UserDetails {
 
     @Column(name = User.BIRTHDAY_DATE_FIELD, nullable = false)
     private LocalDateTime birthdayDate;
+
+    //TODO:IMPLEMENT THE BLOCKING REASON AND WHO BLOCKED IT
+    @Column(name = User.LOCKED_AT_FIELD)
+    private LocalDateTime lockedDate;
 
     @Column(name = User.LAST_ACCESS_DATE_FIELD)
     private LocalDateTime lastAccessDate;
@@ -90,7 +94,7 @@ public class UserModel extends Auditable<String> implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.deletedDate == null;
+        return this.lockedDate == null;
     }
 
     @Override

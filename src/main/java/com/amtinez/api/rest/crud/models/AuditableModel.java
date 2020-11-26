@@ -16,8 +16,6 @@ import javax.persistence.MappedSuperclass;
 
 import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Auditable.CREATED_AT_FIELD;
 import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Auditable.CREATED_BY_FIELD;
-import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Auditable.DELETED_AT_FIELD;
-import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Auditable.DELETED_BY_FIELD;
 import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Auditable.LAST_UPDATED_AT_FIELD;
 import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Auditable.LAST_UPDATED_BY_FIELD;
 
@@ -28,28 +26,22 @@ import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Audita
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Auditable<U> {
+public abstract class AuditableModel<U> {
 
     @CreatedBy
     @Column(name = CREATED_BY_FIELD, updatable = false)
-    protected U createdBy;
+    private U createdBy;
 
     @CreatedDate
     @Column(name = CREATED_AT_FIELD, updatable = false)
-    protected LocalDateTime createdDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedBy
     @Column(name = LAST_UPDATED_BY_FIELD)
-    protected U lastUpdatedBy;
+    private U lastUpdatedBy;
 
     @LastModifiedDate
     @Column(name = LAST_UPDATED_AT_FIELD)
-    protected LocalDateTime lastUpdatedDate;
-
-    @Column(name = DELETED_BY_FIELD)
-    protected U deletedBy;
-
-    @Column(name = DELETED_AT_FIELD)
-    protected LocalDateTime deletedDate;
+    private LocalDateTime lastUpdatedDate;
 
 }

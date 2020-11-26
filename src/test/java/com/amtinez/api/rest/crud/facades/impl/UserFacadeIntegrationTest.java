@@ -92,13 +92,10 @@ public class UserFacadeIntegrationTest {
         assertEquals(localDateTimeNow, userSaved.getBirthdayDate());
         assertEquals(Boolean.FALSE, userSaved.getEnabled());
         assertEquals(USER_AUTHORITY_LIST_SIZE, userSaved.getAuthorities().size());
-        assertEquals(AUTHORITY_EXISTING_ID, userSaved.getAuthorities().stream().findFirst().get().getId());
         assertNotNull(userSaved.getCreatedBy());
         assertNotNull(userSaved.getCreatedDate());
         assertNotNull(userSaved.getLastUpdatedBy());
         assertNotNull(userSaved.getLastUpdatedDate());
-        assertNull(userSaved.getDeletedBy());
-        assertNull(userSaved.getDeletedDate());
     }
 
     @Test
