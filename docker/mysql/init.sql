@@ -22,6 +22,9 @@ CREATE TABLE IF NOT EXISTS `users`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
+INSERT INTO users (first_name, last_name, email, password, birthday_date, created_by, created_at, last_updated_by, last_updated_at, last_access_at, last_password_update_at, enabled)
+VALUES ('Admin', 'Admin', 'admin@admin.com', '$2a$10$9FLFNGN/dql1T7eyeiSE8e9RuUYQMb9dqj0SL82BTyHkaX0nCXuPC', sysdate(), 'Admin Admin', sysdate(), 'Admin Admin', sysdate(), sysdate(), sysdate(), TRUE);
+
 CREATE TABLE IF NOT EXISTS `authorities`
 (
     `id`              BIGINT       NOT NULL AUTO_INCREMENT,
@@ -35,6 +38,9 @@ CREATE TABLE IF NOT EXISTS `authorities`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
+INSERT INTO authorities (name, created_by, created_at, last_updated_by, last_updated_at)
+VALUES ('admin', 'Admin Admin', sysdate(), 'Admin Admin', sysdate());
+
 CREATE TABLE IF NOT EXISTS `users_authorities`
 (
     `id_user`      BIGINT NOT NULL,
@@ -45,3 +51,6 @@ CREATE TABLE IF NOT EXISTS `users_authorities`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
+
+INSERT INTO users_authorities (id_user, id_authority)
+VALUES (1, 1);

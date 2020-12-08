@@ -16,6 +16,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,7 +59,7 @@ public class UserModel extends AuditableModel<String> implements UserDetails {
     @Column(name = User.BIRTHDAY_DATE_FIELD, nullable = false)
     private LocalDateTime birthdayDate;
 
-    //TODO:IMPLEMENT THE BLOCKING REASON AND WHO BLOCKED IT
+    //TODO: IMPLEMENT THE BLOCKING REASON AND WHO BLOCKED IT
     @Column(name = User.LOCKED_AT_FIELD)
     private LocalDateTime lockedDate;
 
@@ -71,7 +72,7 @@ public class UserModel extends AuditableModel<String> implements UserDetails {
     @Column(name = User.ENABLED_FIELD, nullable = false)
     private Boolean enabled;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = UsersAuthorities.TABLE_NAME,
                joinColumns = {@JoinColumn(name = UsersAuthorities.ID_USER_FIELD)},
                inverseJoinColumns = {@JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD)})
