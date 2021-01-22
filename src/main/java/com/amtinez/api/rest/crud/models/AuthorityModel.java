@@ -41,6 +41,7 @@ public class AuthorityModel extends AuditableModel<String> implements GrantedAut
     @Column(name = Authority.NAME_FIELD, length = Authority.NAME_FIELD_LENGTH)
     private String name;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(name = UsersAuthorities.TABLE_NAME,
                joinColumns = {@JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD)},

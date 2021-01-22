@@ -72,6 +72,7 @@ public class UserModel extends AuditableModel<String> implements UserDetails {
     @Column(name = User.ENABLED_FIELD, nullable = false)
     private Boolean enabled;
 
+    @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = UsersAuthorities.TABLE_NAME,
                joinColumns = {@JoinColumn(name = UsersAuthorities.ID_USER_FIELD)},

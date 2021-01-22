@@ -8,6 +8,7 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.Set;
 
@@ -20,7 +21,7 @@ import static com.amtinez.api.rest.crud.constants.MapperConstants.User.USERS_PRO
 /**
  * @author amartinezcerro@gmail.com
  */
-@Mapper(componentModel = SPRING_COMPONENT_MODEL)
+@Mapper(componentModel = SPRING_COMPONENT_MODEL, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper {
 
     @Mapping(target = PASSWORD_PROPERTY, ignore = true)
