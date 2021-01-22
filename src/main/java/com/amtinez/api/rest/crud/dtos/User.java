@@ -3,6 +3,7 @@ package com.amtinez.api.rest.crud.dtos;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class User extends Auditable<String> {
 
     private Long id;
