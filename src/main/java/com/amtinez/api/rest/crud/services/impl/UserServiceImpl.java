@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean existsUserEmail(final String email) {
+        return userDao.existsByEmail(email);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(final String email) {
         final Optional<UserModel> user = Optional.ofNullable(userDao.findByEmail(email));
         return user.orElseThrow(() -> new UsernameNotFoundException(String.format(USER_EMAIL_NOT_FOUND, email)));

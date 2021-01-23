@@ -101,6 +101,11 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
+    public void testExistsUserEmail() {
+        assertTrue(userService.existsUserEmail(EXISTING_EMAIL));
+    }
+
+    @Test
     public void testLoadUserByUsernameExists() {
         assertNotNull(userService.loadUserByUsername(EXISTING_EMAIL));
     }
