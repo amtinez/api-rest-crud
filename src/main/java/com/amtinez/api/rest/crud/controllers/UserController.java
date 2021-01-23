@@ -2,6 +2,7 @@ package com.amtinez.api.rest.crud.controllers;
 
 import com.amtinez.api.rest.crud.dtos.User;
 import com.amtinez.api.rest.crud.facades.UserFacade;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 import static com.amtinez.api.rest.crud.constants.ControllerConstants.User.BASE_URL;
 import static com.amtinez.api.rest.crud.constants.ControllerConstants.User.ID_URL;
@@ -24,29 +27,34 @@ import static com.amtinez.api.rest.crud.constants.ControllerConstants.User.ID_UR
 @RequestMapping(BASE_URL)
 public class UserController {
 
-    //TODO: IMPLEMENT EXCEPTIONS AND MESSAGES FOR DIFFERENT EVENTS, E.G. USER NOT FOUND
-
     @Resource
     private UserFacade userFacade;
 
     @GetMapping
-    public List<User> findAllUsers() {
-        return userFacade.findAllUsers();
+    public ResponseEntity<List<User>> findAllUsers() {
+        return ResponseEntity.ok(userFacade.findAllUsers());
     }
 
     @PutMapping
-    public User registerUser(@RequestBody final User user) {
-        return userFacade.registerUser(user);
+    public ResponseEntity<User> registerUser(@Valid @RequestBody final User user) {
+        return ResponseEntity.ok(userFacade.registerUser(user));
     }
 
     @GetMapping(ID_URL)
-    public User findUser(@PathVariable final Long id) throws Exception {
-        return userFacade.findUser(id).orElseThrow(Exception::new);
+    public ResponseEntity<User> findUser(@PathVariable final Long id) {
+        final Optional<User> user = userFacade.findUser(id);
+        return user.map(userFound -> ResponseEntity.ok().body(userFound)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(ID_URL)
-    public void deleteUser(@PathVariable final Long id) {
-        userFacade.deleteUser(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable final Long id) {
+        final Optional<User> user = userFacade.findUser(id);
+        if (user.isPresent()) {
+            userFacade.deleteUser(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

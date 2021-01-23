@@ -41,4 +41,12 @@ public interface UserService extends UserDetailsService {
      */
     void deleteUser(final Long id);
 
+    /**
+     * Retrieves if exists an user with the given email address
+     *
+     * @param email the email of the user model
+     * @return if email address exists
+     */
+    boolean existsUserEmail(final String email);
+
 }
