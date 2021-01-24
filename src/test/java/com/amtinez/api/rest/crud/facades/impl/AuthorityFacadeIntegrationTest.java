@@ -1,5 +1,6 @@
 package com.amtinez.api.rest.crud.facades.impl;
 
+import com.amtinez.api.rest.crud.annotations.MockUser;
 import com.amtinez.api.rest.crud.constants.ConfigurationConstants.Profiles;
 import com.amtinez.api.rest.crud.dtos.Authority;
 import com.amtinez.api.rest.crud.facades.AuthorityFacade;
@@ -27,6 +28,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 @ActiveProfiles(Profiles.TEST)
 @Transactional
+@MockUser
 public class AuthorityFacadeIntegrationTest {
 
     //TODO - IN OTHER TASK - MORE TEST
