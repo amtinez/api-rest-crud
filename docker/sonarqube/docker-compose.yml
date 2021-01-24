@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: arc-sonarqube
+    image: sonarqube
+    ports:
+      - 9000:9000
+      - 9092:9092
+    environment:
+      - sonar.login=admin
+      - sonar.password=nimda
+    volumes:
+      - ../../docker-data/sonarqube/data:/opt/sonarqube/data
+      - ../../docker-data/sonarqube/extensions:/opt/sonarqube/extensions

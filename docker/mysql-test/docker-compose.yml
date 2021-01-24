@@ -20,5 +20,5 @@ services:
       test: /usr/bin/mysql --user=root --password=rootapirestcrud --execute "SHOW DATABASES;"
       timeout: 3s
     volumes:
-    - /Users/almartinez/personal/api-rest-crud/docker-data/mysql-test:/var/lib/mysql
-    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../../docker-data/mysql-test:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
