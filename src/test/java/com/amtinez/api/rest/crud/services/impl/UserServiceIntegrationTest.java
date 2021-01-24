@@ -1,5 +1,6 @@
 package com.amtinez.api.rest.crud.services.impl;
 
+import com.amtinez.api.rest.crud.annotations.MockUser;
 import com.amtinez.api.rest.crud.constants.ConfigurationConstants.Profiles;
 import com.amtinez.api.rest.crud.models.UserModel;
 import com.amtinez.api.rest.crud.services.UserService;
@@ -30,6 +31,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 @ActiveProfiles(Profiles.TEST)
 @Transactional
+@MockUser
 public class UserServiceIntegrationTest {
 
     //TODO - IN OTHER TASK - MORE TEST - DATABASE VALIDATIONS

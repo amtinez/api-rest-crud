@@ -9,6 +9,9 @@ public class ConfigurationConstants {
 
         public static final String TEST = "test";
 
+        private Profiles() {
+        }
+
     }
 
     private ConfigurationConstants() {
