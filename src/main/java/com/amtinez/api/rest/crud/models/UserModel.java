@@ -2,7 +2,10 @@ package com.amtinez.api.rest.crud.models;
 
 import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.User;
 import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.UsersAuthorities;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -22,19 +25,20 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import static com.amtinez.api.rest.crud.constants.DatabaseConstants.DATABASE_NAME;
 import static com.amtinez.api.rest.crud.constants.SecurityConstants.INACTIVE_LIFETIME_MONTHS;
 import static com.amtinez.api.rest.crud.constants.SecurityConstants.PASSWORD_LIFETIME_MONTHS;
 
 /**
  * @author amartinezcerro@gmail.com
  */
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = User.TABLE_NAME,
-       catalog = DATABASE_NAME)
-public class UserModel implements UserDetails {
+@Table(name = User.TABLE_NAME)
+public class UserModel extends AuditableModel<String> implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,30 +59,25 @@ public class UserModel implements UserDetails {
     @Column(name = User.BIRTHDAY_DATE_FIELD, nullable = false)
     private LocalDateTime birthdayDate;
 
-    @Column(name = User.REGISTER_DATE_FIELD, nullable = false)
-    private LocalDateTime registerDate;
+    //TODO: IMPLEMENT THE BLOCKING REASON AND WHO BLOCKED IT
+    @Column(name = User.LOCKED_AT_FIELD)
+    private LocalDateTime lockedDate;
 
-    @Column(name = User.DELETE_DATE_FIELD)
-    private LocalDateTime deleteDate;
-
-    @Column(name = User.LAST_ACCESS_DATE_FIELD, nullable = false)
+    @Column(name = User.LAST_ACCESS_DATE_FIELD)
     private LocalDateTime lastAccessDate;
 
-    @Column(name = User.LAST_UPDATE_DATE_FIELD)
-    private LocalDateTime lastUpdateDate;
-
-    @Column(name = User.PASSWORD_UPDATE_DATE_FIELD, nullable = false)
-    private LocalDateTime passwordUpdateDate;
+    @Column(name = User.LAST_PASSWORD_UPDATE_DATE_FIELD)
+    private LocalDateTime lastPasswordUpdateDate;
 
     @Column(name = User.ENABLED_FIELD, nullable = false)
     private Boolean enabled;
 
+    @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = UsersAuthorities.TABLE_NAME, catalog = DATABASE_NAME, joinColumns = {
-        @JoinColumn(name = UsersAuthorities.ID_USER_FIELD, nullable = false, updatable = false)}, inverseJoinColumns = {
-        @JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD, nullable = false, updatable = false)})
+    @JoinTable(name = UsersAuthorities.TABLE_NAME,
+               joinColumns = {@JoinColumn(name = UsersAuthorities.ID_USER_FIELD)},
+               inverseJoinColumns = {@JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD)})
     private Set<AuthorityModel> authorities = new HashSet<>(0);
-
 
     @Override
     public Set<AuthorityModel> getAuthorities() {
@@ -97,16 +96,17 @@ public class UserModel implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.deleteDate == null;
+        return this.lockedDate == null;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return ChronoUnit.MONTHS.between(this.passwordUpdateDate, LocalDateTime.now()) < PASSWORD_LIFETIME_MONTHS;
+        return ChronoUnit.MONTHS.between(this.lastPasswordUpdateDate, LocalDateTime.now()) < PASSWORD_LIFETIME_MONTHS;
     }
 
     @Override
     public boolean isEnabled() {
         return this.enabled;
     }
+
 }

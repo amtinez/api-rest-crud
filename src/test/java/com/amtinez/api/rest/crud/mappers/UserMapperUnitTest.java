@@ -61,7 +61,6 @@ public class UserMapperUnitTest {
         when(authorityModel.getName()).thenReturn(AUTHORITY_NAME);
         when(userModel.getAuthorities()).thenReturn(Collections.singleton(authorityModel));
 
-
         when(user.getId()).thenReturn(USER_ID);
         when(user.getFirstName()).thenReturn(USER_FIRST_NAME);
         when(user.getLastName()).thenReturn(USER_LAST_NAME);
@@ -89,14 +88,14 @@ public class UserMapperUnitTest {
     @Test
     public void modelToDtoNullAuthorities() {
         when(userModel.getAuthorities()).thenReturn(null);
-        User user = mapper.userModelToUser(userModel);
+        final User user = mapper.userModelToUser(userModel);
         assertNull(user.getAuthorities());
     }
 
     @Test
     public void modelToDtoNullAuthority() {
         when(userModel.getAuthorities()).thenReturn(Collections.singleton(null));
-        User user = mapper.userModelToUser(userModel);
+        final User user = mapper.userModelToUser(userModel);
         assertNull(user.getAuthorities().iterator().next());
     }
 
@@ -122,14 +121,14 @@ public class UserMapperUnitTest {
     @Test
     public void dtoToModelNullAuthorities() {
         when(user.getAuthorities()).thenReturn(null);
-        UserModel userModel = mapper.userToUserModel(user);
+        final UserModel userModel = mapper.userToUserModel(user);
         assertNull(userModel.getAuthorities());
     }
 
     @Test
     public void dtoToModelNullAuthority() {
         when(user.getAuthorities()).thenReturn(Collections.singleton(null));
-        UserModel userModel = mapper.userToUserModel(user);
+        final UserModel userModel = mapper.userToUserModel(user);
         assertNull(userModel.getAuthorities().iterator().next());
     }
 

@@ -1,4 +1,4 @@
-package com.amtinez.api.rest.crud.dtos;
+package com.amtinez.api.rest.crud.errors;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author amartinezcerro@gmail.com
@@ -16,10 +16,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Authority extends Auditable<String> {
+public class ValidationError {
 
-    private Long id;
-    private String name;
-    private Set<User> users;
+    private List<FieldError> errors;
 
 }
