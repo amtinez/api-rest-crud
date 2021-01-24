@@ -6,6 +6,7 @@ echo "2. Start docker containers"
 echo "3. Compile"
 echo "4. Start the server"
 echo "5. Compile and start the server"
+echo "6. Execute Sonarqube report"
 echo "0. Exit"
 
 PROJECT_PATH=~/personal/api-rest-crud
@@ -23,12 +24,14 @@ do
 			echo "Removing docker containers..."
 			docker rm arc-mysql -f
 			docker rm arc-mysql-test -f
+			docker rm arc-sonarqube -f
 			break
 			;;
 		2)
 			echo "Starting docker containers..."
 			cd $PROJECT_PATH/docker/mysql && docker-compose up -d
 			cd $PROJECT_PATH/docker/mysql-test && docker-compose up -d
+			cd $PROJECT_PATH/docker/sonarqube && docker-compose up -d
 			break
 			;;
 		3)
@@ -44,6 +47,11 @@ do
 		5)
 			echo "Compiling and starting the server..."
 			cd $PROJECT_PATH && ./gradlew classes && ./gradlew testClasses && ./gradlew bootRun
+			break
+			;;
+		6)
+			echo "Executing Sonarqube report..."
+			cd $PROJECT_PATH && ./gradlew check && ./gradlew jacocoTestReport && ./gradlew sonarqube
 			break
 			;;
 		*)
