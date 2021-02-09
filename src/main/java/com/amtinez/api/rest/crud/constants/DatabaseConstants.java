@@ -19,7 +19,11 @@ public class DatabaseConstants {
             public static final String PASSWORD_FIELD = "password";
             public static final int PASSWORD_FIELD_LENGTH = 80;
             public static final String BIRTHDAY_DATE_FIELD = "birthday_date";
+            public static final String LOCKED_BY_FIELD = "locked_by";
+            public static final int LOCKED_BY_FIELD_LENGTH = 100;
             public static final String LOCKED_AT_FIELD = "locked_at";
+            public static final String LOCKED_REASON_FIELD = "locked_reason";
+            public static final int LOCKED_REASON_FIELD_LENGTH = 100;
             public static final String LAST_ACCESS_DATE_FIELD = "last_access_at";
             public static final String LAST_PASSWORD_UPDATE_DATE_FIELD = "last_password_update_at";
             public static final String ENABLED_FIELD = "enabled";
