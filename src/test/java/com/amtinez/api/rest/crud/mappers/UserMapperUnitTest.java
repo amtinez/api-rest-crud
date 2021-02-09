@@ -29,6 +29,9 @@ public class UserMapperUnitTest {
     private static final String USER_LAST_NAME = "testLastName";
     private static final String USER_EMAIL = "test@email.com";
     private static final LocalDateTime USER_BIRTHDAY_DATE = LocalDateTime.now();
+    private static final String USER_LOCKED_BY = String.format("%s %s", USER_FIRST_NAME, USER_LAST_NAME);
+    private static final LocalDateTime USER_LOCKED_DATE = LocalDateTime.now();
+    private static final String USER_LOCKED_REASON = "testLockedReason";
 
     private static final Long AUTHORITY_ID = 1L;
     private static final String AUTHORITY_NAME = "testName";
@@ -56,6 +59,9 @@ public class UserMapperUnitTest {
         when(userModel.getLastName()).thenReturn(USER_LAST_NAME);
         when(userModel.getEmail()).thenReturn(USER_EMAIL);
         when(userModel.getBirthdayDate()).thenReturn(USER_BIRTHDAY_DATE);
+        when(userModel.getLockedBy()).thenReturn(USER_LOCKED_BY);
+        when(userModel.getLockedDate()).thenReturn(USER_LOCKED_DATE);
+        when(userModel.getLockedReason()).thenReturn(USER_LOCKED_REASON);
 
         when(authorityModel.getId()).thenReturn(AUTHORITY_ID);
         when(authorityModel.getName()).thenReturn(AUTHORITY_NAME);
@@ -66,6 +72,9 @@ public class UserMapperUnitTest {
         when(user.getLastName()).thenReturn(USER_LAST_NAME);
         when(user.getEmail()).thenReturn(USER_EMAIL);
         when(user.getBirthdayDate()).thenReturn(USER_BIRTHDAY_DATE);
+        when(user.getLockedBy()).thenReturn(USER_LOCKED_BY);
+        when(user.getLockedDate()).thenReturn(USER_LOCKED_DATE);
+        when(user.getLockedReason()).thenReturn(USER_LOCKED_REASON);
         when(authority.getId()).thenReturn(AUTHORITY_ID);
         when(authority.getName()).thenReturn(AUTHORITY_NAME);
         when(user.getAuthorities()).thenReturn(Collections.singleton(authority));
@@ -78,6 +87,9 @@ public class UserMapperUnitTest {
         assertEquals(USER_LAST_NAME, user.getLastName());
         assertEquals(USER_EMAIL, user.getEmail());
         assertEquals(USER_BIRTHDAY_DATE, user.getBirthdayDate());
+        assertEquals(USER_LOCKED_BY, user.getLockedBy());
+        assertEquals(USER_LOCKED_DATE, user.getLockedDate());
+        assertEquals(USER_LOCKED_REASON, user.getLockedReason());
         final Set<Authority> authorities = user.getAuthorities();
         assertEquals(USER_AUTHORITIES_SIZE, authorities.size());
         final Authority authority = authorities.iterator().next();
@@ -111,6 +123,9 @@ public class UserMapperUnitTest {
         assertEquals(USER_LAST_NAME, userModel.getLastName());
         assertEquals(USER_EMAIL, userModel.getEmail());
         assertEquals(USER_BIRTHDAY_DATE, userModel.getBirthdayDate());
+        assertEquals(USER_LOCKED_BY, userModel.getLockedBy());
+        assertEquals(USER_LOCKED_DATE, userModel.getLockedDate());
+        assertEquals(USER_LOCKED_REASON, userModel.getLockedReason());
         final Set<AuthorityModel> authorities = userModel.getAuthorities();
         assertEquals(USER_AUTHORITIES_SIZE, authorities.size());
         final AuthorityModel authority = authorities.iterator().next();
