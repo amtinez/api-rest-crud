@@ -18,6 +18,8 @@ import javax.validation.constraints.Size;
 import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.EMAIL_MAX_FIELD_LENGTH;
 import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.FIRST_NAME_MAX_FIELD_LENGTH;
 import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.LAST_NAME_MAX_FIELD_LENGTH;
+import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.LOCKED_BY_MAX_FIELD_LENGTH;
+import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.LOCKED_REASON_MAX_FIELD_LENGTH;
 import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.PASSWORD_MAX_FIELD_LENGTH;
 
 /**
@@ -53,7 +55,16 @@ public class User extends Auditable<String> {
     @NotNull
     private LocalDateTime birthdayDate;
 
+    @Size(max = LOCKED_BY_MAX_FIELD_LENGTH)
+    private String lockedBy;
+
+    private LocalDateTime lockedDate;
+
+    @Size(max = LOCKED_REASON_MAX_FIELD_LENGTH)
+    private String lockedReason;
+
     private Boolean enabled;
+
     private Set<Authority> authorities;
 
 }
