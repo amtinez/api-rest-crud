@@ -12,8 +12,6 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 
-import static com.amtinez.api.rest.crud.constants.SecurityConstants.USER_EMAIL_NOT_FOUND;
-
 /**
  * @author amartinezcerro@gmail.com
  */
@@ -51,7 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(final String email) {
         final Optional<UserModel> user = Optional.ofNullable(userDao.findByEmail(email));
-        return user.orElseThrow(() -> new UsernameNotFoundException(String.format(USER_EMAIL_NOT_FOUND, email)));
+        return user.orElseThrow(() -> new UsernameNotFoundException(String.format("User with the email: %s not found", email)));
     }
 
 }
