@@ -17,14 +17,11 @@ import java.util.Optional;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import static com.amtinez.api.rest.crud.constants.ControllerConstants.User.BASE_URL;
-import static com.amtinez.api.rest.crud.constants.ControllerConstants.User.ID_URL;
-
 /**
  * @author amartinezcerro@gmail.com
  */
 @RestController
-@RequestMapping(BASE_URL)
+@RequestMapping("/users")
 public class UserController {
 
     @Resource
@@ -40,13 +37,13 @@ public class UserController {
         return ResponseEntity.ok(userFacade.registerUser(user));
     }
 
-    @GetMapping(ID_URL)
+    @GetMapping("/{id}")
     public ResponseEntity<User> findUser(@PathVariable final Long id) {
         final Optional<User> user = userFacade.findUser(id);
         return user.map(userFound -> ResponseEntity.ok().body(userFound)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping(ID_URL)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable final Long id) {
         final Optional<User> user = userFacade.findUser(id);
         if (user.isPresent()) {
