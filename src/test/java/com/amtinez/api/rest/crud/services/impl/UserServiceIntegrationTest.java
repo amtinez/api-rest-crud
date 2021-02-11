@@ -37,6 +37,7 @@ public class UserServiceIntegrationTest {
     //TODO - IN OTHER TASK - MORE TEST - DATABASE VALIDATIONS
 
     private static final Long EXISTING_ID = 1L;
+    private static final Long NOT_EXISTING_ID = 999L;
     private static final String EXISTING_FIRST_NAME = "User";
     private static final String EXISTING_LAST_NAME = "One";
     private static final String EXISTING_EMAIL = "user@one.com";
@@ -46,6 +47,9 @@ public class UserServiceIntegrationTest {
     private static final String LAST_NAME = "userTestLastName";
     private static final String EMAIL = "user@test.com";
     private static final String PASSWORD = "userTestPassword";
+    private static final String LOCKED_BY = FIRST_NAME + LAST_NAME;
+    private static final LocalDateTime LOCKED_DATE = LocalDateTime.now();
+    private static final String LOCKED_REASON = "userTestLockedReason";
 
     @Resource
     private UserService userService;
@@ -56,6 +60,12 @@ public class UserServiceIntegrationTest {
         assertTrue(userModelFound.isPresent());
         assertEquals(EXISTING_FIRST_NAME, userModelFound.get().getFirstName());
         assertEquals(EXISTING_LAST_NAME, userModelFound.get().getLastName());
+    }
+
+    @Test
+    public void testFindUserNotExists() {
+        final Optional<UserModel> userModelFound = userService.findUser(NOT_EXISTING_ID);
+        assertFalse(userModelFound.isPresent());
     }
 
     @Test
@@ -105,6 +115,26 @@ public class UserServiceIntegrationTest {
     @Test
     public void testExistsUserEmail() {
         assertTrue(userService.existsUserEmail(EXISTING_EMAIL));
+    }
+
+    @Test
+    public void testEnableUser() {
+        assertEquals(1, userService.updateUserEnabledStatus(EXISTING_ID, Boolean.TRUE));
+    }
+
+    @Test
+    public void testEnableUserNotExists() {
+        assertEquals(0, userService.updateUserEnabledStatus(NOT_EXISTING_ID, Boolean.TRUE));
+    }
+
+    @Test
+    public void testLockUser() {
+        assertEquals(1, userService.updateUserLockedInformation(EXISTING_ID, LOCKED_BY, LOCKED_DATE, LOCKED_REASON));
+    }
+
+    @Test
+    public void testLockUserNotExists() {
+        assertEquals(0, userService.updateUserLockedInformation(NOT_EXISTING_ID, LOCKED_BY, LOCKED_DATE, LOCKED_REASON));
     }
 
     @Test
