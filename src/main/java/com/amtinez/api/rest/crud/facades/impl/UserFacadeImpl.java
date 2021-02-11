@@ -5,8 +5,11 @@ import com.amtinez.api.rest.crud.facades.UserFacade;
 import com.amtinez.api.rest.crud.mappers.UserMapper;
 import com.amtinez.api.rest.crud.models.UserModel;
 import com.amtinez.api.rest.crud.services.UserService;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +27,9 @@ public class UserFacadeImpl implements UserFacade {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private AuditorAware<String> auditorAware;
 
     @Override
     public Optional<User> findUser(final Long id) {
@@ -43,12 +49,13 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public User enableUser(final Long id) {
-        final UserModel userModel = UserModel.builder()
-                                             .id(id)
-                                             .enabled(Boolean.TRUE)
-                                             .build();
-        return userMapper.userModelToUser(userService.saveUser(userModel));
+    public int enableUser(final Long id) {
+        return userService.updateUserEnabledStatus(id, Boolean.TRUE);
+    }
+
+    @Override
+    public int disableUser(final Long id) {
+        return userService.updateUserEnabledStatus(id, Boolean.FALSE);
     }
 
     @Override
@@ -60,6 +67,21 @@ public class UserFacadeImpl implements UserFacade {
     public User updateUser(final User user) {
         //TODO: UPDATE ONLY SELECTED FIELDS
         return userMapper.userModelToUser(userService.saveUser(userMapper.userToUserModel(user)));
+    }
+
+    @Override
+    public int lockUser(final Long id, final String lockedReason) {
+        final Optional<String> currentUser = auditorAware.getCurrentAuditor();
+        return currentUser.map(currentUserFound -> userService.updateUserLockedInformation(id,
+                                                                                           currentUserFound,
+                                                                                           LocalDateTime.now(),
+                                                                                           lockedReason))
+                          .orElse(NumberUtils.INTEGER_ZERO);
+    }
+
+    @Override
+    public int unlockUser(final Long id) {
+        return userService.updateUserLockedInformation(id, null, null, null);
     }
 
 }

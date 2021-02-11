@@ -34,12 +34,20 @@ public interface UserFacade {
     User registerUser(final User user);
 
     /**
-     * Enable the user
+     * Enables the user
      *
      * @param id the id of the user
-     * @return the enabled user
+     * @return number of updated users
      */
-    User enableUser(final Long id);
+    int enableUser(final Long id);
+
+    /**
+     * Disables the user
+     *
+     * @param id the id of the user
+     * @return number of updated users
+     */
+    int disableUser(final Long id);
 
     /**
      * Delete the user with the given id
@@ -55,5 +63,22 @@ public interface UserFacade {
      * @return the updated user
      */
     User updateUser(final User user);
+
+    /**
+     * Locks the user
+     *
+     * @param id           the id of the user
+     * @param lockedReason the reason of the lock
+     * @return number of updated users
+     */
+    int lockUser(final Long id, final String lockedReason);
+
+    /**
+     * Unlocks the user
+     *
+     * @param id the id of the user
+     * @return number of updated users
+     */
+    int unlockUser(final Long id);
 
 }
