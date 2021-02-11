@@ -48,6 +48,7 @@ public class UserFacadeIntegrationTest {
     private static final String LAST_NAME = "userTestLastName";
     private static final String EMAIL = "user@test.com";
     private static final String PASSWORD = "userTestPassword";
+    private static final String LOCKED_REASON = "userTestLockedReason";
     private static final int USER_AUTHORITY_LIST_SIZE = 1;
 
     private static final Long AUTHORITY_EXISTING_ID = 1L;
@@ -102,9 +103,20 @@ public class UserFacadeIntegrationTest {
 
     @Test
     public void testEnableUser() {
-        final User user = userFacade.enableUser(EXISTING_ID_TWO);
-        assertNotNull(user);
-        assertEquals(Boolean.TRUE, user.getEnabled());
+        final int affectedUsers = userFacade.enableUser(EXISTING_ID_TWO);
+        assertEquals(1, affectedUsers);
+        final Optional<User> userFound = userFacade.findUser(EXISTING_ID_TWO);
+        assertTrue(userFound.isPresent());
+        assertTrue(userFound.get().getEnabled());
+    }
+
+    @Test
+    public void testDisableUser() {
+        final int affectedUsers = userFacade.disableUser(EXISTING_ID_ONE);
+        assertEquals(1, affectedUsers);
+        final Optional<User> userFound = userFacade.findUser(EXISTING_ID_TWO);
+        assertTrue(userFound.isPresent());
+        assertFalse(userFound.get().getEnabled());
     }
 
     @Test
@@ -122,6 +134,26 @@ public class UserFacadeIntegrationTest {
         userFacade.updateUser(user);
         assertEquals(EXISTING_ID_ONE, user.getId());
         assertEquals(FIRST_NAME_UPDATE, user.getFirstName());
+    }
+
+    public void testLockUser() {
+        final int affectedUsers = userFacade.lockUser(EXISTING_ID_ONE, LOCKED_REASON);
+        assertEquals(1, affectedUsers);
+        Optional<User> user = userFacade.findUser(EXISTING_ID_ONE);
+        assertTrue(user.isPresent());
+        assertNotNull(user.get().getLockedBy());
+        assertNotNull(user.get().getLockedDate());
+        assertEquals(LOCKED_REASON, user.get().getLockedReason());
+    }
+
+    public void testUnlockUser() {
+        final int affectedUsers = userFacade.unlockUser(EXISTING_ID_ONE);
+        assertEquals(1, affectedUsers);
+        Optional<User> user = userFacade.findUser(EXISTING_ID_ONE);
+        assertTrue(user.isPresent());
+        assertNull(user.get().getLockedBy());
+        assertNull(user.get().getLockedDate());
+        assertNull(user.get().getLockedReason());
     }
 
 }

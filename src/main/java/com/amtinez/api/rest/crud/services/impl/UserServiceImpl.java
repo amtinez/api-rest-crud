@@ -7,12 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
-
-import static com.amtinez.api.rest.crud.constants.SecurityConstants.USER_EMAIL_NOT_FOUND;
 
 /**
  * @author amartinezcerro@gmail.com
@@ -49,9 +48,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int updateUserEnabledStatus(final Long id, final Boolean enabled) {
+        return userDao.updateEnabledStatusById(id, enabled);
+    }
+
+    @Override
+    public int updateUserLockedInformation(final Long id,
+                                           final String lockedBy,
+                                           final LocalDateTime lockedDate,
+                                           final String lockedReason) {
+        return userDao.updateLockedInformationById(id, lockedBy, lockedDate, lockedReason);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(final String email) {
         final Optional<UserModel> user = Optional.ofNullable(userDao.findByEmail(email));
-        return user.orElseThrow(() -> new UsernameNotFoundException(String.format(USER_EMAIL_NOT_FOUND, email)));
+        return user.orElseThrow(() -> new UsernameNotFoundException(String.format("User with the email: %s not found", email)));
     }
 
 }

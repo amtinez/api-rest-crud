@@ -53,7 +53,14 @@ public class User extends Auditable<String> {
     @NotNull
     private LocalDateTime birthdayDate;
 
+    private String lockedBy;
+
+    private LocalDateTime lockedDate;
+
+    private String lockedReason;
+
     private Boolean enabled;
+
     private Set<Authority> authorities;
 
 }

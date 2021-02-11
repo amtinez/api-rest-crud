@@ -12,10 +12,12 @@ CREATE TABLE IF NOT EXISTS `users`
     `created_at`              TIMESTAMP    NOT NULL,
     `last_updated_by`         VARCHAR(100) NOT NULL,
     `last_updated_at`         TIMESTAMP    NOT NULL,
-    `locked_at`               TIMESTAMP DEFAULT NULL,
-    `last_access_at`          TIMESTAMP DEFAULT NULL,
-    `last_password_update_at` TIMESTAMP DEFAULT NULL,
-    `enabled`                 BOOLEAN   DEFAULT NULL,
+    `locked_by`               VARCHAR(100) DEFAULT NULL,
+    `locked_at`               TIMESTAMP    DEFAULT NULL,
+    `locked_reason`           VARCHAR(100) DEFAULT NULL,
+    `last_access_at`          TIMESTAMP    DEFAULT NULL,
+    `last_password_update_at` TIMESTAMP    DEFAULT NULL,
+    `enabled`                 BOOLEAN      DEFAULT NULL,
     PRIMARY KEY (`id`),
     UNIQUE KEY `UK_email` (`email`)
 ) ENGINE = InnoDB

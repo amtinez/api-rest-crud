@@ -59,9 +59,14 @@ public class UserModel extends AuditableModel<String> implements UserDetails {
     @Column(name = User.BIRTHDAY_DATE_FIELD, nullable = false)
     private LocalDateTime birthdayDate;
 
-    //TODO: IMPLEMENT THE BLOCKING REASON AND WHO BLOCKED IT
+    @Column(name = User.LOCKED_BY_FIELD, length = User.LOCKED_BY_FIELD_LENGTH)
+    private String lockedBy;
+
     @Column(name = User.LOCKED_AT_FIELD)
     private LocalDateTime lockedDate;
+
+    @Column(name = User.LOCKED_REASON_FIELD, length = User.LOCKED_REASON_FIELD_LENGTH)
+    private String lockedReason;
 
     @Column(name = User.LAST_ACCESS_DATE_FIELD)
     private LocalDateTime lastAccessDate;

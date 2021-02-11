@@ -13,8 +13,6 @@ public class SecurityConstants {
     public static final String ROLE_ADMIN = "admin";
     public static final String ROLE_USER = "user";
 
-    public static final String USER_EMAIL_NOT_FOUND = "User with the email: %s not found";
-
     private SecurityConstants() {
     }
 
