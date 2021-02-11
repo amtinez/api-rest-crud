@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean existsUserEmail(final String email) {
         return userDao.existsByEmail(email);
+    }
+
+    @Override
+    public int updateUserEnabledStatus(final Long id, final Boolean enabled) {
+        return userDao.updateEnabledStatusById(id, enabled);
+    }
+
+    @Override
+    public int updateUserLockedInformation(final Long id,
+                                           final String lockedBy,
+                                           final LocalDateTime lockedDate,
+                                           final String lockedReason) {
+        return userDao.updateLockedInformationById(id, lockedBy, lockedDate, lockedReason);
     }
 
     @Override

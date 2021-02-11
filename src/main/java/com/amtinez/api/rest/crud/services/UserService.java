@@ -3,6 +3,7 @@ package com.amtinez.api.rest.crud.services;
 import com.amtinez.api.rest.crud.models.UserModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,5 +49,25 @@ public interface UserService extends UserDetailsService {
      * @return if email address exists
      */
     boolean existsUserEmail(final String email);
+
+    /**
+     * Enables or disables the user if it exists
+     *
+     * @param id      the id of the user
+     * @param enabled the enabled of the user
+     * @return number of updated users
+     */
+    int updateUserEnabledStatus(final Long id, final Boolean enabled);
+
+    /**
+     * Lock or unlock the user if it exists
+     *
+     * @param id           the id of the user
+     * @param lockedBy     the full name of the lock executor
+     * @param lockedDate   the date of the lock
+     * @param lockedReason the reason of the lock
+     * @return number of updated users
+     */
+    int updateUserLockedInformation(final Long id, final String lockedBy, final LocalDateTime lockedDate, final String lockedReason);
 
 }
