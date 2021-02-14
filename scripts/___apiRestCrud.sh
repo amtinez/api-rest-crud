@@ -9,7 +9,7 @@ echo "5. Compile and start the server"
 echo "6. Execute Sonarqube report"
 echo "0. Exit"
 
-PROJECT_PATH=~/personal/api-rest-crud
+PROJECT_PATH=[YOUR PROJECT PATH]
 
 while :
 do
@@ -29,9 +29,7 @@ do
 			;;
 		2)
 			echo "Starting docker containers..."
-			cd $PROJECT_PATH/docker/mysql && docker-compose up -d
-			cd $PROJECT_PATH/docker/mysql-test && docker-compose up -d
-			cd $PROJECT_PATH/docker/sonarqube && docker-compose up -d
+			cd $PROJECT_PATH/docker && docker-compose up -d
 			break
 			;;
 		3)
