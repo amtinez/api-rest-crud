@@ -43,4 +43,4 @@ following property inside the ```~/.gradle/gradle.properties``` file:
 
 ## EER Diagram
 
-![EER Diagram](bbdd/EER-Diagram.png)
+![EER Diagram](database/EER-Diagram.png)
