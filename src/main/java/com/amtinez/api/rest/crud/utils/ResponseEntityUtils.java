@@ -4,7 +4,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.http.ResponseEntity;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 public class ResponseEntityUtils {
 

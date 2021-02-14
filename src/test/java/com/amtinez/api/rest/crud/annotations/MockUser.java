@@ -7,7 +7,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * @author amartinezcerro@gmail.com
+ * MockUser is the interface used to implement a mock of the logged-in user.
+ *
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @WithSecurityContext(factory = MockUserSecurityContextFactory.class)

@@ -14,7 +14,7 @@ import java.util.Optional;
 import javax.annotation.Resource;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Service
 public class UserServiceImpl implements UserService {

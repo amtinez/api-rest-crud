@@ -10,7 +10,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * @author amartinezcerro@gmail.com
+ * AuditorAwareImpl is the class that will be in charge of returning the full name of the user that is connected in order to keep track of
+ * the different modifications that are made to the database.
+ *
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Component
 public class AuditorAwareImpl implements AuditorAware<String> {

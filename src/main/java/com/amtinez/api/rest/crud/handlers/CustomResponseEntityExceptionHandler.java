@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author amartinezcerro@gmail.com
+ * CustomResponseEntityExceptionHandler is the class that will handle the different exceptions that may occur in our controllers.
+ *
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @ControllerAdvice
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {

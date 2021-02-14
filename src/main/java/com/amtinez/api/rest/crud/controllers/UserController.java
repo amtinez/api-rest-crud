@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @RestController
 @RequestMapping("/users")

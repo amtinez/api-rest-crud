@@ -3,7 +3,7 @@ package com.amtinez.api.rest.crud.utils;
 import com.amtinez.api.rest.crud.models.UserModel;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 public class UserUtils {
 

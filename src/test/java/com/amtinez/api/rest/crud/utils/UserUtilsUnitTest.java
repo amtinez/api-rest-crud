@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UserUtilsUnitTest {
