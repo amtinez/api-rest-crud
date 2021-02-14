@@ -26,7 +26,7 @@ echo "5. Compile and start the server"
 echo "6. Execute Sonarqube report"
 echo "0. Exit"
 
-PROJECT_PATH=~/personal/api-rest-crud/
+PROJECT_PATH=[YOUR PROJECT PATH]
 ```
 
 ## Sonarqube
@@ -43,4 +43,4 @@ following property inside the ```~/.gradle/gradle.properties``` file:
 
 ## EER Diagram
 
-![EER Diagram](docker/mysql/EER-Diagram.png)
+![EER Diagram](bbdd/EER-Diagram.png)
