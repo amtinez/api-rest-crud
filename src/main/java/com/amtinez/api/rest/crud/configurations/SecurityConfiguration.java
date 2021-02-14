@@ -16,7 +16,7 @@ import static com.amtinez.api.rest.crud.constants.SecurityConstants.BCRYPT_PASSW
 import static com.amtinez.api.rest.crud.constants.SecurityConstants.ROLE_ADMIN;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Configuration
 @EnableWebSecurity

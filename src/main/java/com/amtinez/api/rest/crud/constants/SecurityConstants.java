@@ -1,7 +1,7 @@
 package com.amtinez.api.rest.crud.constants;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 public class SecurityConstants {
 

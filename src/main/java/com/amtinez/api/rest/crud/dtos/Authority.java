@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.Set;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Builder
 @NoArgsConstructor

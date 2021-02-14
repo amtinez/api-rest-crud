@@ -19,7 +19,7 @@ import static com.amtinez.api.rest.crud.constants.MapperConstants.User.PASSWORD_
 import static com.amtinez.api.rest.crud.constants.MapperConstants.User.USERS_PROPERTY;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Mapper(componentModel = SPRING_COMPONENT_MODEL, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper {

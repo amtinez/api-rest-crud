@@ -11,7 +11,9 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
- * @author amartinezcerro@gmail.com
+ * UniqueUserEmail is the interface used to implement the uniqueness restriction of a user's email address.
+ *
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)

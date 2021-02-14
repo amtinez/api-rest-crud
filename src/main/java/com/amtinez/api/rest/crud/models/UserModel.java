@@ -29,7 +29,7 @@ import static com.amtinez.api.rest.crud.constants.SecurityConstants.INACTIVE_LIF
 import static com.amtinez.api.rest.crud.constants.SecurityConstants.PASSWORD_LIFETIME_MONTHS;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Builder
 @Getter

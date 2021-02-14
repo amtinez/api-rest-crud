@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Component
 public class UserFacadeImpl implements UserFacade {

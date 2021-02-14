@@ -9,7 +9,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
 
 /**
- * @author amartinezcerro@gmail.com
+ * MockUserSecurityContextFactory is the class in charge of creating a security context in order to create a mock of the logged in user for
+ * the different tests.
+ *
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 public class MockUserSecurityContextFactory implements WithSecurityContextFactory<MockUser> {
 

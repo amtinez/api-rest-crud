@@ -21,7 +21,7 @@ import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.LAST_
 import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.PASSWORD_MAX_FIELD_LENGTH;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Builder
 @NoArgsConstructor

@@ -23,7 +23,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Builder
 @Getter

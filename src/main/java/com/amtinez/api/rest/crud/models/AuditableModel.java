@@ -20,7 +20,7 @@ import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Audita
 import static com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Auditable.LAST_UPDATED_BY_FIELD;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Getter
 @Setter
