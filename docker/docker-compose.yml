@@ -9,11 +9,11 @@ services:
       MYSQL_USER: amtinez
       MYSQL_PASSWORD: apirestcrud
       MYSQL_ROOT_PASSWORD: rootapirestcrud
-      MYSQL_TCP_PORT: 3307
+      MYSQL_TCP_PORT: 3306
     expose:
-      - 3307
+      - 3306
     ports:
-      - 3307:3307
+      - 3306:3306
     healthcheck:
       interval: 3s
       retries: 2000
@@ -21,7 +21,7 @@ services:
       timeout: 3s
     volumes:
       - ../docker-data/mysql:/var/lib/mysql
-      - ../bbdd/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   db-test:
     container_name: arc-mysql-test
@@ -31,19 +31,19 @@ services:
       MYSQL_USER: amtineztest
       MYSQL_PASSWORD: apirestcrudtest
       MYSQL_ROOT_PASSWORD: rootapirestcrudtest
-      MYSQL_TCP_PORT: 3308
+      MYSQL_TCP_PORT: 3307
     expose:
-      - 3308
+      - 3307
     ports:
-      - 3308:3308
+      - 3307:3307
     healthcheck:
       interval: 3s
       retries: 2000
-      test: /usr/bin/mysql --user=root --password=rootapirestcrud --execute "SHOW DATABASES;"
+      test: /usr/bin/mysql --user=root --password=rootapirestcrudtest --execute "SHOW DATABASES;"
       timeout: 3s
     volumes:
       - ../docker-data/mysql-test:/var/lib/mysql
-      - ../bbdd/init-test.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../database/init-test.sql:/docker-entrypoint-initdb.d/init.sql
 
   sonarqube:
     container_name: arc-sonarqube
