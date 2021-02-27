@@ -20,7 +20,7 @@ services:
       test: /usr/bin/mysql --user=root --password=rootapirestcrud --execute "SHOW DATABASES;"
       timeout: 3s
     volumes:
-      - ../../docker-data/mysql:/var/lib/mysql
+      - ../docker-data/mysql:/var/lib/mysql
       - ../bbdd/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   db-test:
@@ -42,7 +42,7 @@ services:
       test: /usr/bin/mysql --user=root --password=rootapirestcrud --execute "SHOW DATABASES;"
       timeout: 3s
     volumes:
-      - ../../docker-data/mysql-test:/var/lib/mysql
+      - ../docker-data/mysql-test:/var/lib/mysql
       - ../bbdd/init-test.sql:/docker-entrypoint-initdb.d/init.sql
 
   sonarqube:
@@ -55,5 +55,5 @@ services:
       - sonar.login=admin
       - sonar.password=nimda
     volumes:
-      - ../../docker-data/sonarqube/data:/opt/sonarqube/data
+      - ../docker-data/sonarqube/data:/opt/sonarqube/data
       - ../../docker-data/sonarqube/extensions:/opt/sonarqube/extensions
