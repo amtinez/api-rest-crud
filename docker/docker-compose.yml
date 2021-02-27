@@ -56,4 +56,4 @@ services:
       - sonar.password=nimda
     volumes:
       - ../docker-data/sonarqube/data:/opt/sonarqube/data
-      - ../../docker-data/sonarqube/extensions:/opt/sonarqube/extensions
+      - ../docker-data/sonarqube/extensions:/opt/sonarqube/extensions
