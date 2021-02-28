@@ -41,7 +41,7 @@ public class UserFacadeIntegrationTest {
     private static final Long NOT_EXISTING_ID = 999L;
     private static final String EXISTING_FIRST_NAME = "User";
     private static final String EXISTING_LAST_NAME = "One";
-    private static final int EXISTING_USERS_SIZE = 2;
+    private static final int EXISTING_USERS_SIZE = 3;
 
     private static final String FIRST_NAME = "userTestFirstName";
     private static final String FIRST_NAME_UPDATE = "userTestFirstNameUpdate";

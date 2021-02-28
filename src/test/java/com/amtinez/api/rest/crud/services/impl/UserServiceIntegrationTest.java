@@ -36,12 +36,14 @@ public class UserServiceIntegrationTest {
 
     //TODO - IN OTHER TASK - MORE TEST - DATABASE VALIDATIONS
 
-    private static final Long EXISTING_ID = 1L;
+    private static final Long EXISTING_ID_ONE = 1L;
+    private static final Long EXISTING_ID_TWO = 2L;
+    private static final Long EXISTING_ID_THREE = 3L;
     private static final Long NOT_EXISTING_ID = 999L;
     private static final String EXISTING_FIRST_NAME = "User";
     private static final String EXISTING_LAST_NAME = "One";
     private static final String EXISTING_EMAIL = "user@one.com";
-    private static final int EXISTING_USERS_SIZE = 2;
+    private static final int EXISTING_USERS_SIZE = 3;
 
     private static final String FIRST_NAME = "userTestFirstName";
     private static final String LAST_NAME = "userTestLastName";
@@ -56,10 +58,26 @@ public class UserServiceIntegrationTest {
 
     @Test
     public void testFindUser() {
-        final Optional<UserModel> userModelFound = userService.findUser(EXISTING_ID);
+        final Optional<UserModel> userModelFound = userService.findUser(EXISTING_ID_ONE);
         assertTrue(userModelFound.isPresent());
         assertEquals(EXISTING_FIRST_NAME, userModelFound.get().getFirstName());
         assertEquals(EXISTING_LAST_NAME, userModelFound.get().getLastName());
+    }
+
+    @Test
+    public void testFindUserExpired() {
+        final Optional<UserModel> userModelFound = userService.findUser(EXISTING_ID_TWO);
+        assertTrue(userModelFound.isPresent());
+        assertFalse(userModelFound.get().isAccountNonExpired());
+        assertFalse(userModelFound.get().isCredentialsNonExpired());
+    }
+
+    @Test
+    public void testFindUserExpiredNullValues() {
+        final Optional<UserModel> userModelFound = userService.findUser(EXISTING_ID_THREE);
+        assertTrue(userModelFound.isPresent());
+        assertFalse(userModelFound.get().isAccountNonExpired());
+        assertFalse(userModelFound.get().isCredentialsNonExpired());
     }
 
     @Test
@@ -112,8 +130,8 @@ public class UserServiceIntegrationTest {
 
     @Test
     public void testDeleteUser() {
-        userService.deleteUser(EXISTING_ID);
-        assertTrue(userService.findUser(EXISTING_ID).isEmpty());
+        userService.deleteUser(EXISTING_ID_ONE);
+        assertTrue(userService.findUser(EXISTING_ID_ONE).isEmpty());
     }
 
     @Test
@@ -123,7 +141,7 @@ public class UserServiceIntegrationTest {
 
     @Test
     public void testEnableUser() {
-        assertEquals(1, userService.updateUserEnabledStatus(EXISTING_ID, Boolean.TRUE));
+        assertEquals(1, userService.updateUserEnabledStatus(EXISTING_ID_ONE, Boolean.TRUE));
     }
 
     @Test
@@ -133,7 +151,10 @@ public class UserServiceIntegrationTest {
 
     @Test
     public void testLockUser() {
-        assertEquals(1, userService.updateUserLockedInformation(EXISTING_ID, LOCKED_BY, LOCKED_DATE, LOCKED_REASON));
+        assertEquals(1, userService.updateUserLockedInformation(EXISTING_ID_ONE, LOCKED_BY, LOCKED_DATE, LOCKED_REASON));
+        final Optional<UserModel> userModelFound = userService.findUser(EXISTING_ID_ONE);
+        assertTrue(userModelFound.isPresent());
+        assertFalse(userModelFound.get().isAccountNonLocked());
     }
 
     @Test
