@@ -65,7 +65,6 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public User updateUser(final User user) {
-        //TODO: UPDATE ONLY SELECTED FIELDS
         return userMapper.userModelToUser(userService.saveUser(userMapper.userToUserModel(user)));
     }
 

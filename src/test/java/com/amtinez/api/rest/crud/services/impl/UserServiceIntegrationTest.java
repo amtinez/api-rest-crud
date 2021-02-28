@@ -94,10 +94,14 @@ public class UserServiceIntegrationTest {
         assertEquals(FIRST_NAME, userModelSaved.getFirstName());
         assertEquals(LAST_NAME, userModelSaved.getLastName());
         assertEquals(EMAIL, userModelSaved.getEmail());
+        assertEquals(EMAIL, userModelSaved.getUsername());
         assertFalse(userModelSaved.isEnabled());
         assertEquals(PASSWORD, userModelSaved.getPassword());
         assertEquals(localDateTimeNow, userModelSaved.getBirthdayDate());
         assertNull(userModelSaved.getLockedDate());
+        assertTrue(userModelSaved.isAccountNonLocked());
+        assertTrue(userModelSaved.isAccountNonExpired());
+        assertTrue(userModelSaved.isCredentialsNonExpired());
         assertEquals(localDateTimeNow, userModelSaved.getLastAccessDate());
         assertEquals(localDateTimeNow, userModelSaved.getLastPasswordUpdateDate());
         assertNotNull(userModelSaved.getCreatedBy());

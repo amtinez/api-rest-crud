@@ -5,6 +5,7 @@ import com.amtinez.api.rest.crud.constants.ConfigurationConstants.Profiles;
 import com.amtinez.api.rest.crud.dtos.Authority;
 import com.amtinez.api.rest.crud.dtos.User;
 import com.amtinez.api.rest.crud.facades.UserFacade;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,10 +36,9 @@ import static org.junit.Assert.assertTrue;
 @MockUser
 public class UserFacadeIntegrationTest {
 
-    //TODO - IN OTHER TASK - MORE TEST
-
     private static final Long EXISTING_ID_ONE = 1L;
     private static final Long EXISTING_ID_TWO = 2L;
+    private static final Long NOT_EXISTING_ID = 999L;
     private static final String EXISTING_FIRST_NAME = "User";
     private static final String EXISTING_LAST_NAME = "One";
     private static final int EXISTING_USERS_SIZE = 2;
@@ -111,12 +111,24 @@ public class UserFacadeIntegrationTest {
     }
 
     @Test
+    public void testEnableUserNotExists() {
+        final int affectedUsers = userFacade.enableUser(NOT_EXISTING_ID);
+        assertEquals(0, affectedUsers);
+    }
+
+    @Test
     public void testDisableUser() {
         final int affectedUsers = userFacade.disableUser(EXISTING_ID_ONE);
         assertEquals(1, affectedUsers);
         final Optional<User> userFound = userFacade.findUser(EXISTING_ID_TWO);
         assertTrue(userFound.isPresent());
         assertFalse(userFound.get().getEnabled());
+    }
+
+    @Test
+    public void testDisableUserNotExists() {
+        final int affectedUsers = userFacade.disableUser(NOT_EXISTING_ID);
+        assertEquals(0, affectedUsers);
     }
 
     @Test
@@ -136,6 +148,7 @@ public class UserFacadeIntegrationTest {
         assertEquals(FIRST_NAME_UPDATE, user.getFirstName());
     }
 
+    @Test
     public void testLockUser() {
         final int affectedUsers = userFacade.lockUser(EXISTING_ID_ONE, LOCKED_REASON);
         assertEquals(1, affectedUsers);
@@ -146,6 +159,13 @@ public class UserFacadeIntegrationTest {
         assertEquals(LOCKED_REASON, user.get().getLockedReason());
     }
 
+    @Test
+    public void testLockUserExists() {
+        final int affectedUsers = userFacade.lockUser(NOT_EXISTING_ID, StringUtils.EMPTY);
+        assertEquals(0, affectedUsers);
+    }
+
+    @Test
     public void testUnlockUser() {
         final int affectedUsers = userFacade.unlockUser(EXISTING_ID_ONE);
         assertEquals(1, affectedUsers);
@@ -154,6 +174,12 @@ public class UserFacadeIntegrationTest {
         assertNull(user.get().getLockedBy());
         assertNull(user.get().getLockedDate());
         assertNull(user.get().getLockedReason());
+    }
+
+    @Test
+    public void testUnlockUserNotExists() {
+        final int affectedUsers = userFacade.unlockUser(NOT_EXISTING_ID);
+        assertEquals(0, affectedUsers);
     }
 
 }
