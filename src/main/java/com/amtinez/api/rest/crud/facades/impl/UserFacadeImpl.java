@@ -45,6 +45,8 @@ public class UserFacadeImpl implements UserFacade {
     public User registerUser(final User user) {
         final UserModel userModel = userMapper.userToUserModel(user);
         userModel.setEnabled(Boolean.FALSE);
+        userModel.setLastAccessDate(LocalDateTime.now());
+        userModel.setLastPasswordUpdateDate(LocalDateTime.now());
         return userMapper.userModelToUser(userService.saveUser(userModel));
     }
 
