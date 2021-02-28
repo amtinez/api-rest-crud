@@ -47,6 +47,7 @@ public class AuthorityServiceIntegrationTest {
         final Optional<AuthorityModel> authorityModelFound = authorityService.findAuthority(EXISTING_ID);
         assertTrue(authorityModelFound.isPresent());
         assertEquals(EXISTING_NAME, authorityModelFound.get().getName());
+        assertEquals(EXISTING_NAME, authorityModelFound.get().getAuthority());
     }
 
     @Test
@@ -65,6 +66,7 @@ public class AuthorityServiceIntegrationTest {
         assertNotNull(authorityModelSaved);
         assertNotNull(authorityModelSaved.getId());
         assertEquals(NAME, authorityModelSaved.getName());
+        assertEquals(NAME, authorityModelSaved.getAuthority());
     }
 
     @Test
