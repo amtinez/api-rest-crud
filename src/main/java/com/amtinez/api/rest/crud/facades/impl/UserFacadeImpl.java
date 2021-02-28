@@ -45,6 +45,8 @@ public class UserFacadeImpl implements UserFacade {
     public User registerUser(final User user) {
         final UserModel userModel = userMapper.userToUserModel(user);
         userModel.setEnabled(Boolean.FALSE);
+        userModel.setLastAccessDate(LocalDateTime.now());
+        userModel.setLastPasswordUpdateDate(LocalDateTime.now());
         return userMapper.userModelToUser(userService.saveUser(userModel));
     }
 
@@ -65,7 +67,6 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public User updateUser(final User user) {
-        //TODO: UPDATE ONLY SELECTED FIELDS
         return userMapper.userModelToUser(userService.saveUser(userMapper.userToUserModel(user)));
     }
 

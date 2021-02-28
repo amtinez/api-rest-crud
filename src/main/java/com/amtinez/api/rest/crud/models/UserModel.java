@@ -96,7 +96,8 @@ public class UserModel extends AuditableModel<String> implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return ChronoUnit.MONTHS.between(this.lastAccessDate, LocalDateTime.now()) < INACTIVE_LIFETIME_MONTHS;
+        return this.lastAccessDate != null
+            && ChronoUnit.MONTHS.between(this.lastAccessDate, LocalDateTime.now()) < INACTIVE_LIFETIME_MONTHS;
     }
 
     @Override
@@ -106,7 +107,8 @@ public class UserModel extends AuditableModel<String> implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return ChronoUnit.MONTHS.between(this.lastPasswordUpdateDate, LocalDateTime.now()) < PASSWORD_LIFETIME_MONTHS;
+        return this.lastPasswordUpdateDate != null
+            && ChronoUnit.MONTHS.between(this.lastPasswordUpdateDate, LocalDateTime.now()) < PASSWORD_LIFETIME_MONTHS;
     }
 
     @Override

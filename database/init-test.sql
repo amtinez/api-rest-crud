@@ -28,10 +28,12 @@ CREATE TABLE `users`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
+INSERT INTO users (first_name, last_name, email, password, birthday_date, created_by, created_at, last_updated_by, last_updated_at, enabled, last_access_at, last_password_update_at)
+VALUES ('User', 'One', 'user@one.com', 'testing', sysdate(), 'User One', sysdate(), 'User One', sysdate(), TRUE, sysdate(), sysdate());
+INSERT INTO users (first_name, last_name, email, password, birthday_date, created_by, created_at, last_updated_by, last_updated_at, enabled, last_access_at, last_password_update_at)
+VALUES ('User', 'Two', 'user@two.com', 'testing', sysdate(), 'User Two', sysdate(), 'User Two', sysdate(), FALSE, '2008-01-01 00:00:01', '2008-01-01 00:00:01');
 INSERT INTO users (first_name, last_name, email, password, birthday_date, created_by, created_at, last_updated_by, last_updated_at, enabled)
-VALUES ('User', 'One', 'user@one.com', 'testing', sysdate(), 'User One', sysdate(), 'User One', sysdate(), TRUE);
-INSERT INTO users (first_name, last_name, email, password, birthday_date, created_by, created_at, last_updated_by, last_updated_at, enabled)
-VALUES ('User', 'Two', 'user@two.com', 'testing', sysdate(), 'User Two', sysdate(), 'User Two', sysdate(), FALSE);
+VALUES ('User', 'Three', 'user@three.com', 'testing', sysdate(), 'User Three', sysdate(), 'User Three', sysdate(), FALSE);
 
 CREATE TABLE `authorities`
 (
@@ -50,6 +52,8 @@ INSERT INTO authorities (name, created_by, created_at, last_updated_by, last_upd
 VALUES ('Authority_One', 'User One', sysdate(), 'User One', sysdate());
 INSERT INTO authorities (name, created_by, created_at, last_updated_by, last_updated_at)
 VALUES ('Authority_Two', 'User Two', sysdate(), 'User Two', sysdate());
+INSERT INTO authorities (name, created_by, created_at, last_updated_by, last_updated_at)
+VALUES ('Authority_Three', 'User Three', sysdate(), 'User Three', sysdate());
 
 CREATE TABLE `users_authorities`
 (
@@ -66,3 +70,5 @@ INSERT INTO users_authorities (id_user, id_authority)
 VALUES (1, 1);
 INSERT INTO users_authorities (id_user, id_authority)
 VALUES (2, 2);
+INSERT INTO users_authorities (id_user, id_authority)
+VALUES (3, 3);

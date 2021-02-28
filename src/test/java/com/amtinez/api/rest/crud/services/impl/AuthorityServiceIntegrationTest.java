@@ -35,7 +35,7 @@ public class AuthorityServiceIntegrationTest {
 
     private static final Long EXISTING_ID = 1L;
     private static final String EXISTING_NAME = "Authority_One";
-    private static final int EXISTING_AUTHORITIES_SIZE = 2;
+    private static final int EXISTING_AUTHORITIES_SIZE = 3;
 
     private static final String NAME = "Authority_Test";
 
@@ -47,6 +47,7 @@ public class AuthorityServiceIntegrationTest {
         final Optional<AuthorityModel> authorityModelFound = authorityService.findAuthority(EXISTING_ID);
         assertTrue(authorityModelFound.isPresent());
         assertEquals(EXISTING_NAME, authorityModelFound.get().getName());
+        assertEquals(EXISTING_NAME, authorityModelFound.get().getAuthority());
     }
 
     @Test
@@ -65,6 +66,7 @@ public class AuthorityServiceIntegrationTest {
         assertNotNull(authorityModelSaved);
         assertNotNull(authorityModelSaved.getId());
         assertEquals(NAME, authorityModelSaved.getName());
+        assertEquals(NAME, authorityModelSaved.getAuthority());
     }
 
     @Test

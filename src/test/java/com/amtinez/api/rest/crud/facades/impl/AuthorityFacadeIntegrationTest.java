@@ -31,11 +31,9 @@ import static org.junit.Assert.assertTrue;
 @MockUser
 public class AuthorityFacadeIntegrationTest {
 
-    //TODO - IN OTHER TASK - MORE TEST
-
     private static final Long EXISTING_ID = 1L;
     private static final String EXISTING_NAME = "Authority_One";
-    private static final int EXISTING_AUTHORITIES_SIZE = 2;
+    private static final int EXISTING_AUTHORITIES_SIZE = 3;
 
     private static final String NAME = "Authority_Test";
 
