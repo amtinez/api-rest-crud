@@ -4,6 +4,7 @@ import com.amtinez.api.rest.crud.dtos.User;
 import com.amtinez.api.rest.crud.facades.UserFacade;
 import com.amtinez.api.rest.crud.utils.ResponseEntityUtils;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,10 +20,15 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.LOCKED_REASON_MAX_FIELD_LENGTH;
 
 /**
  * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
+@Validated
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -68,7 +74,8 @@ public class UserController {
     }
 
     @PatchMapping("/{id}/lock")
-    public ResponseEntity<Void> lockUser(@PathVariable final Long id, @RequestParam final String reason) {
+    public ResponseEntity<Void> lockUser(@PathVariable final Long id,
+                                         @RequestParam @NotBlank @Size(max = LOCKED_REASON_MAX_FIELD_LENGTH) final String reason) {
         return ResponseEntityUtils.getResponseEntityByAffectedEntities(userFacade.lockUser(id, reason));
     }
 
