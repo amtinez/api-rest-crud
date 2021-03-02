@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `users`
 INSERT INTO users (first_name, last_name, email, password, birthday_date, created_by, created_at, last_updated_by, last_updated_at, last_access_at, last_password_update_at, enabled)
 VALUES ('Admin', 'Admin', 'admin@admin.com', '$2a$10$9FLFNGN/dql1T7eyeiSE8e9RuUYQMb9dqj0SL82BTyHkaX0nCXuPC', sysdate(), 'Admin Admin', sysdate(), 'Admin Admin', sysdate(), sysdate(), sysdate(), TRUE);
 
-CREATE TABLE IF NOT EXISTS `authorities`
+CREATE TABLE IF NOT EXISTS `roles`
 (
     `id`              BIGINT       NOT NULL AUTO_INCREMENT,
     `name`            VARCHAR(50)  NOT NULL,
@@ -40,19 +40,21 @@ CREATE TABLE IF NOT EXISTS `authorities`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
-INSERT INTO authorities (name, created_by, created_at, last_updated_by, last_updated_at)
-VALUES ('admin', 'Admin Admin', sysdate(), 'Admin Admin', sysdate());
+INSERT INTO roles (name, created_by, created_at, last_updated_by, last_updated_at)
+VALUES ('ADMIN', 'Admin Admin', sysdate(), 'Admin Admin', sysdate());
+INSERT INTO roles (name, created_by, created_at, last_updated_by, last_updated_at)
+VALUES ('USER', 'Admin Admin', sysdate(), 'Admin Admin', sysdate());
 
-CREATE TABLE IF NOT EXISTS `users_authorities`
+CREATE TABLE IF NOT EXISTS `users_roles`
 (
-    `id_user`      BIGINT NOT NULL,
-    `id_authority` BIGINT NOT NULL,
-    PRIMARY KEY (`id_authority`, `id_user`),
-    CONSTRAINT `FK_AUTHORITY` FOREIGN KEY (`id_authority`) REFERENCES `authorities` (`id`),
+    `id_user` BIGINT NOT NULL,
+    `id_role` BIGINT NOT NULL,
+    PRIMARY KEY (`id_role`, `id_user`),
+    CONSTRAINT `FK_ROLE` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`),
     CONSTRAINT `FK_USER` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
-INSERT INTO users_authorities (id_user, id_authority)
+INSERT INTO users_roles (id_user, id_role)
 VALUES (1, 1);

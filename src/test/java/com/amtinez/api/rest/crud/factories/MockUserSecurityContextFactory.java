@@ -1,7 +1,7 @@
 package com.amtinez.api.rest.crud.factories;
 
 import com.amtinez.api.rest.crud.annotations.MockUser;
-import com.amtinez.api.rest.crud.models.UserModel;
+import com.amtinez.api.rest.crud.security.impl.UserDetailsImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -22,13 +22,13 @@ public class MockUserSecurityContextFactory implements WithSecurityContextFactor
     @Override
     public SecurityContext createSecurityContext(MockUser mockUser) {
         final SecurityContext context = SecurityContextHolder.createEmptyContext();
-        final UserModel userModel = UserModel.builder()
-                                             .firstName(MOCK_USER_FIRST_NAME)
-                                             .lastName(MOCK_USER_LAST_NAME)
-                                             .build();
-        final Authentication authentication = new UsernamePasswordAuthenticationToken(userModel,
-                                                                                      userModel.getPassword(),
-                                                                                      userModel.getAuthorities());
+        final UserDetailsImpl userDetails = UserDetailsImpl.builder()
+                                                           .firstName(MOCK_USER_FIRST_NAME)
+                                                           .lastName(MOCK_USER_LAST_NAME)
+                                                           .build();
+        final Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails,
+                                                                                      userDetails.getPassword(),
+                                                                                      userDetails.getAuthorities());
         context.setAuthentication(authentication);
         return context;
     }

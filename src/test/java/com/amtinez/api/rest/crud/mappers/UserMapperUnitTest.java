@@ -1,8 +1,8 @@
 package com.amtinez.api.rest.crud.mappers;
 
-import com.amtinez.api.rest.crud.dtos.Authority;
+import com.amtinez.api.rest.crud.dtos.Role;
 import com.amtinez.api.rest.crud.dtos.User;
-import com.amtinez.api.rest.crud.models.AuthorityModel;
+import com.amtinez.api.rest.crud.models.RoleModel;
 import com.amtinez.api.rest.crud.models.UserModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,22 +33,22 @@ public class UserMapperUnitTest {
     private static final LocalDateTime USER_LOCKED_DATE = LocalDateTime.now();
     private static final String USER_LOCKED_REASON = "testLockedReason";
 
-    private static final Long AUTHORITY_ID = 1L;
-    private static final String AUTHORITY_NAME = "testName";
+    private static final Long ROLE_ID = 1L;
+    private static final String ROLE_NAME = "testName";
 
-    private static final int USER_AUTHORITIES_SIZE = 1;
+    private static final int USER_ROLES_SIZE = 1;
 
     @Mock
     private UserModel userModel;
 
     @Mock
-    private AuthorityModel authorityModel;
+    private RoleModel roleModel;
 
     @Mock
     private User user;
 
     @Mock
-    private Authority authority;
+    private Role role;
 
     private final UserMapper mapper = new UserMapperImpl();
 
@@ -63,9 +63,9 @@ public class UserMapperUnitTest {
         when(userModel.getLockedDate()).thenReturn(USER_LOCKED_DATE);
         when(userModel.getLockedReason()).thenReturn(USER_LOCKED_REASON);
 
-        when(authorityModel.getId()).thenReturn(AUTHORITY_ID);
-        when(authorityModel.getName()).thenReturn(AUTHORITY_NAME);
-        when(userModel.getAuthorities()).thenReturn(Collections.singleton(authorityModel));
+        when(roleModel.getId()).thenReturn(ROLE_ID);
+        when(roleModel.getName()).thenReturn(ROLE_NAME);
+        when(userModel.getRoles()).thenReturn(Collections.singleton(roleModel));
 
         when(user.getId()).thenReturn(USER_ID);
         when(user.getFirstName()).thenReturn(USER_FIRST_NAME);
@@ -75,9 +75,9 @@ public class UserMapperUnitTest {
         when(user.getLockedBy()).thenReturn(USER_LOCKED_BY);
         when(user.getLockedDate()).thenReturn(USER_LOCKED_DATE);
         when(user.getLockedReason()).thenReturn(USER_LOCKED_REASON);
-        when(authority.getId()).thenReturn(AUTHORITY_ID);
-        when(authority.getName()).thenReturn(AUTHORITY_NAME);
-        when(user.getAuthorities()).thenReturn(Collections.singleton(authority));
+        when(role.getId()).thenReturn(ROLE_ID);
+        when(role.getName()).thenReturn(ROLE_NAME);
+        when(user.getRoles()).thenReturn(Collections.singleton(role));
     }
 
     @Test
@@ -90,25 +90,25 @@ public class UserMapperUnitTest {
         assertEquals(USER_LOCKED_BY, user.getLockedBy());
         assertEquals(USER_LOCKED_DATE, user.getLockedDate());
         assertEquals(USER_LOCKED_REASON, user.getLockedReason());
-        final Set<Authority> authorities = user.getAuthorities();
-        assertEquals(USER_AUTHORITIES_SIZE, authorities.size());
-        final Authority authority = authorities.iterator().next();
-        assertEquals(AUTHORITY_ID, authority.getId());
-        assertEquals(AUTHORITY_NAME, authority.getName());
+        final Set<Role> roles = user.getRoles();
+        assertEquals(USER_ROLES_SIZE, roles.size());
+        final Role role = roles.iterator().next();
+        assertEquals(ROLE_ID, role.getId());
+        assertEquals(ROLE_NAME, role.getName());
     }
 
     @Test
-    public void modelToDtoNullAuthorities() {
-        when(userModel.getAuthorities()).thenReturn(null);
+    public void modelToDtoNullRoles() {
+        when(userModel.getRoles()).thenReturn(null);
         final User user = mapper.userModelToUser(userModel);
-        assertNull(user.getAuthorities());
+        assertNull(user.getRoles());
     }
 
     @Test
-    public void modelToDtoNullAuthority() {
-        when(userModel.getAuthorities()).thenReturn(Collections.singleton(null));
+    public void modelToDtoNullRole() {
+        when(userModel.getRoles()).thenReturn(Collections.singleton(null));
         final User user = mapper.userModelToUser(userModel);
-        assertNull(user.getAuthorities().iterator().next());
+        assertNull(user.getRoles().iterator().next());
     }
 
     @Test
@@ -126,25 +126,25 @@ public class UserMapperUnitTest {
         assertEquals(USER_LOCKED_BY, userModel.getLockedBy());
         assertEquals(USER_LOCKED_DATE, userModel.getLockedDate());
         assertEquals(USER_LOCKED_REASON, userModel.getLockedReason());
-        final Set<AuthorityModel> authorities = userModel.getAuthorities();
-        assertEquals(USER_AUTHORITIES_SIZE, authorities.size());
-        final AuthorityModel authority = authorities.iterator().next();
-        assertEquals(AUTHORITY_ID, authority.getId());
-        assertEquals(AUTHORITY_NAME, authority.getName());
+        final Set<RoleModel> roles = userModel.getRoles();
+        assertEquals(USER_ROLES_SIZE, roles.size());
+        final RoleModel role = roles.iterator().next();
+        assertEquals(ROLE_ID, role.getId());
+        assertEquals(ROLE_NAME, role.getName());
     }
 
     @Test
-    public void dtoToModelNullAuthorities() {
-        when(user.getAuthorities()).thenReturn(null);
+    public void dtoToModelNullRoles() {
+        when(user.getRoles()).thenReturn(null);
         final UserModel userModel = mapper.userToUserModel(user);
-        assertNull(userModel.getAuthorities());
+        assertNull(userModel.getRoles());
     }
 
     @Test
-    public void dtoToModelNullAuthority() {
-        when(user.getAuthorities()).thenReturn(Collections.singleton(null));
+    public void dtoToModelNullRole() {
+        when(user.getRoles()).thenReturn(Collections.singleton(null));
         final UserModel userModel = mapper.userToUserModel(user);
-        assertNull(userModel.getAuthorities().iterator().next());
+        assertNull(userModel.getRoles().iterator().next());
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.amtinez.api.rest.crud.utils;
 
-import com.amtinez.api.rest.crud.models.UserModel;
+import com.amtinez.api.rest.crud.security.impl.UserDetailsImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,17 +20,17 @@ public class UserUtilsUnitTest {
     private static final String USER_LAST_NAME = "testLastName";
 
     @Mock
-    private UserModel userModel;
+    private UserDetailsImpl userDetails;
 
     @Before
     public void setUp() {
-        when(userModel.getFirstName()).thenReturn(USER_FIRST_NAME);
-        when(userModel.getLastName()).thenReturn(USER_LAST_NAME);
+        when(userDetails.getFirstName()).thenReturn(USER_FIRST_NAME);
+        when(userDetails.getLastName()).thenReturn(USER_LAST_NAME);
     }
 
     @Test
     public void testGetFullName() {
-        assertEquals(String.format("%s %s", USER_FIRST_NAME, USER_LAST_NAME), UserUtils.getFullName(userModel));
+        assertEquals(String.format("%s %s", USER_FIRST_NAME, USER_LAST_NAME), UserUtils.getFullName(userDetails));
     }
 
 }

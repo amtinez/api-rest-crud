@@ -1,7 +1,6 @@
 package com.amtinez.api.rest.crud.services;
 
 import com.amtinez.api.rest.crud.models.UserModel;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.Optional;
 /**
  * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
-public interface UserService extends UserDetailsService {
+public interface UserService {
 
     /**
      * Retrieves the user model with the given id

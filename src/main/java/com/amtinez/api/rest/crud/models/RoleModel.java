@@ -1,13 +1,13 @@
 package com.amtinez.api.rest.crud.models;
 
-import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Authority;
-import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.UsersAuthorities;
+import com.amtinez.api.rest.crud.audits.AuditableModel;
+import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.Role;
+import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.UsersRoles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,26 +31,21 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = Authority.TABLE_NAME)
-public class AuthorityModel extends AuditableModel<String> implements GrantedAuthority {
+@Table(name = Role.TABLE_NAME)
+public class RoleModel extends AuditableModel<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = Authority.NAME_FIELD, length = Authority.NAME_FIELD_LENGTH)
+    @Column(name = Role.NAME_FIELD, length = Role.NAME_FIELD_LENGTH)
     private String name;
 
     @Builder.Default
     @ManyToMany
-    @JoinTable(name = UsersAuthorities.TABLE_NAME,
-               joinColumns = {@JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD)},
-               inverseJoinColumns = {@JoinColumn(name = UsersAuthorities.ID_USER_FIELD)})
+    @JoinTable(name = UsersRoles.TABLE_NAME,
+               joinColumns = {@JoinColumn(name = UsersRoles.ID_ROLE_FIELD)},
+               inverseJoinColumns = {@JoinColumn(name = UsersRoles.ID_USER_FIELD)})
     private Set<UserModel> users = new HashSet<>(0);
-
-    @Override
-    public String getAuthority() {
-        return this.name;
-    }
 
 }

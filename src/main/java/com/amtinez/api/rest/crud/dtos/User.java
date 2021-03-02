@@ -1,6 +1,7 @@
 package com.amtinez.api.rest.crud.dtos;
 
 import com.amtinez.api.rest.crud.annotations.UniqueUserEmail;
+import com.amtinez.api.rest.crud.audits.Auditable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -61,6 +62,6 @@ public class User extends Auditable<String> {
 
     private Boolean enabled;
 
-    private Set<Authority> authorities;
+    private Set<Role> roles;
 
 }

@@ -3,8 +3,6 @@ package com.amtinez.api.rest.crud.services.impl;
 import com.amtinez.api.rest.crud.daos.UserDao;
 import com.amtinez.api.rest.crud.models.UserModel;
 import com.amtinez.api.rest.crud.services.UserService;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -58,12 +56,6 @@ public class UserServiceImpl implements UserService {
                                            final LocalDateTime lockedDate,
                                            final String lockedReason) {
         return userDao.updateLockedInformationById(id, lockedBy, lockedDate, lockedReason);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(final String email) {
-        final Optional<UserModel> user = Optional.ofNullable(userDao.findByEmail(email));
-        return user.orElseThrow(() -> new UsernameNotFoundException(String.format("User with the email: %s not found", email)));
     }
 
 }
