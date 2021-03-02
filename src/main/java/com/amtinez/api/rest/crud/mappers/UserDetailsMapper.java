@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.time.LocalDateTime;
@@ -47,7 +48,7 @@ public interface UserDetailsMapper {
     UserDetailsImpl userModelToUserDetails(final UserModel userModel);
 
     @Named(ROLES_TO_AUTHORITIES)
-    static Collection<SimpleGrantedAuthority> rolesToAuthorities(final Set<RoleModel> roles) {
+    static Collection<GrantedAuthority> rolesToAuthorities(final Set<RoleModel> roles) {
         return roles.stream()
                     .map(role -> new SimpleGrantedAuthority(RoleUtils.getPrefixedName(role)))
                     .collect(Collectors.toList());
