@@ -11,10 +11,9 @@ public class ConfigurationConstants {
 
         private Profiles() {
         }
-
     }
 
     private ConfigurationConstants() {
-
     }
+
 }
