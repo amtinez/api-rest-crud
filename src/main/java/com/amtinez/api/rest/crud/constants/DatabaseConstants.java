@@ -32,23 +32,23 @@ public class DatabaseConstants {
             }
         }
 
-        public static class Authority {
+        public static class Role {
 
-            public static final String TABLE_NAME = "authorities";
+            public static final String TABLE_NAME = "roles";
             public static final String NAME_FIELD = "name";
             public static final int NAME_FIELD_LENGTH = 50;
 
-            private Authority() {
+            private Role() {
             }
         }
 
-        public static class UsersAuthorities {
+        public static class UsersRoles {
 
-            public static final String TABLE_NAME = "users_authorities";
-            public static final String ID_AUTHORITY_FIELD = "id_authority";
+            public static final String TABLE_NAME = "users_roles";
+            public static final String ID_ROLE_FIELD = "id_role";
             public static final String ID_USER_FIELD = "id_user";
 
-            private UsersAuthorities() {
+            private UsersRoles() {
             }
         }
 
