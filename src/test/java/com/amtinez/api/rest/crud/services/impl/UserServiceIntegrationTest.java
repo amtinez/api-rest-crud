@@ -7,7 +7,6 @@ import com.amtinez.api.rest.crud.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,22 +64,6 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
-    public void testFindUserExpired() {
-        final Optional<UserModel> userModelFound = userService.findUser(EXISTING_ID_TWO);
-        assertTrue(userModelFound.isPresent());
-        assertFalse(userModelFound.get().isAccountNonExpired());
-        assertFalse(userModelFound.get().isCredentialsNonExpired());
-    }
-
-    @Test
-    public void testFindUserExpiredNullValues() {
-        final Optional<UserModel> userModelFound = userService.findUser(EXISTING_ID_THREE);
-        assertTrue(userModelFound.isPresent());
-        assertFalse(userModelFound.get().isAccountNonExpired());
-        assertFalse(userModelFound.get().isCredentialsNonExpired());
-    }
-
-    @Test
     public void testFindUserNotExists() {
         final Optional<UserModel> userModelFound = userService.findUser(NOT_EXISTING_ID);
         assertFalse(userModelFound.isPresent());
@@ -112,14 +95,9 @@ public class UserServiceIntegrationTest {
         assertEquals(FIRST_NAME, userModelSaved.getFirstName());
         assertEquals(LAST_NAME, userModelSaved.getLastName());
         assertEquals(EMAIL, userModelSaved.getEmail());
-        assertEquals(EMAIL, userModelSaved.getUsername());
-        assertFalse(userModelSaved.isEnabled());
         assertEquals(PASSWORD, userModelSaved.getPassword());
         assertEquals(localDateTimeNow, userModelSaved.getBirthdayDate());
         assertNull(userModelSaved.getLockedDate());
-        assertTrue(userModelSaved.isAccountNonLocked());
-        assertTrue(userModelSaved.isAccountNonExpired());
-        assertTrue(userModelSaved.isCredentialsNonExpired());
         assertEquals(localDateTimeNow, userModelSaved.getLastAccessDate());
         assertEquals(localDateTimeNow, userModelSaved.getLastPasswordUpdateDate());
         assertNotNull(userModelSaved.getCreatedBy());
@@ -154,22 +132,14 @@ public class UserServiceIntegrationTest {
         assertEquals(1, userService.updateUserLockedInformation(EXISTING_ID_ONE, LOCKED_BY, LOCKED_DATE, LOCKED_REASON));
         final Optional<UserModel> userModelFound = userService.findUser(EXISTING_ID_ONE);
         assertTrue(userModelFound.isPresent());
-        assertFalse(userModelFound.get().isAccountNonLocked());
+        assertNotNull(userModelFound.get().getLockedDate());
+        assertEquals(LOCKED_BY, userModelFound.get().getLockedBy());
+        assertEquals(LOCKED_REASON, userModelFound.get().getLockedReason());
     }
 
     @Test
     public void testLockUserNotExists() {
         assertEquals(0, userService.updateUserLockedInformation(NOT_EXISTING_ID, LOCKED_BY, LOCKED_DATE, LOCKED_REASON));
-    }
-
-    @Test
-    public void testLoadUserByUsernameExists() {
-        assertNotNull(userService.loadUserByUsername(EXISTING_EMAIL));
-    }
-
-    @Test(expected = UsernameNotFoundException.class)
-    public void testExistingLoadUserByUsernameNotExists() {
-        userService.loadUserByUsername(EMAIL);
     }
 
 }
