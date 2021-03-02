@@ -1,6 +1,5 @@
 package com.amtinez.api.rest.crud.configurations;
 
-import com.amtinez.api.rest.crud.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -8,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.Resource;
@@ -20,10 +20,10 @@ import static com.amtinez.api.rest.crud.constants.SecurityConstants.ROLE_ADMIN;
  */
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
-    private UserService userService;
+    private UserDetailsService userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder getPasswordEncoder() {
@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder authenticationManagerBuilder) {
         final DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userService);
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(getPasswordEncoder());
         authenticationManagerBuilder.authenticationProvider(daoAuthenticationProvider);
     }
@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.antMatcher("/**")
             .authorizeRequests()
             .anyRequest()
-            .hasAuthority(ROLE_ADMIN)
+            .hasRole(ROLE_ADMIN)
             .and()
             .csrf()
             .disable()
