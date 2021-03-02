@@ -36,8 +36,6 @@ public class UserServiceIntegrationTest {
     //TODO - IN OTHER TASK - MORE TEST - DATABASE VALIDATIONS
 
     private static final Long EXISTING_ID_ONE = 1L;
-    private static final Long EXISTING_ID_TWO = 2L;
-    private static final Long EXISTING_ID_THREE = 3L;
     private static final Long NOT_EXISTING_ID = 999L;
     private static final String EXISTING_FIRST_NAME = "User";
     private static final String EXISTING_LAST_NAME = "One";
