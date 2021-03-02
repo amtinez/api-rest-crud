@@ -2,7 +2,7 @@ package com.amtinez.api.rest.crud.facades.impl;
 
 import com.amtinez.api.rest.crud.annotations.MockUser;
 import com.amtinez.api.rest.crud.constants.ConfigurationConstants.Profiles;
-import com.amtinez.api.rest.crud.dtos.Authority;
+import com.amtinez.api.rest.crud.dtos.Role;
 import com.amtinez.api.rest.crud.dtos.User;
 import com.amtinez.api.rest.crud.facades.UserFacade;
 import org.apache.commons.lang3.StringUtils;
@@ -49,9 +49,9 @@ public class UserFacadeIntegrationTest {
     private static final String EMAIL = "user@test.com";
     private static final String PASSWORD = "userTestPassword";
     private static final String LOCKED_REASON = "userTestLockedReason";
-    private static final int USER_AUTHORITY_LIST_SIZE = 1;
+    private static final int USER_ROLE_LIST_SIZE = 1;
 
-    private static final Long AUTHORITY_EXISTING_ID = 1L;
+    private static final Long ROLE_EXISTING_ID = 1L;
 
     @Resource
     private UserFacade userFacade;
@@ -74,16 +74,16 @@ public class UserFacadeIntegrationTest {
     @Test
     public void testRegisterUser() {
         final LocalDateTime localDateTimeNow = LocalDateTime.now();
-        final Authority authority = Authority.builder()
-                                             .id(AUTHORITY_EXISTING_ID)
-                                             .build();
+        final Role role = Role.builder()
+                              .id(ROLE_EXISTING_ID)
+                              .build();
         final User user = User.builder()
                               .firstName(FIRST_NAME)
                               .lastName(LAST_NAME)
                               .email(EMAIL)
                               .password(PASSWORD)
                               .birthdayDate(localDateTimeNow)
-                              .authorities(Collections.singleton(authority))
+                              .roles(Collections.singleton(role))
                               .build();
         final User userSaved = userFacade.registerUser(user);
         assertNotNull(userSaved);
@@ -94,7 +94,7 @@ public class UserFacadeIntegrationTest {
         assertNull(userSaved.getPassword());
         assertEquals(localDateTimeNow, userSaved.getBirthdayDate());
         assertEquals(Boolean.FALSE, userSaved.getEnabled());
-        assertEquals(USER_AUTHORITY_LIST_SIZE, userSaved.getAuthorities().size());
+        assertEquals(USER_ROLE_LIST_SIZE, userSaved.getRoles().size());
         assertNotNull(userSaved.getCreatedBy());
         assertNotNull(userSaved.getCreatedDate());
         assertNotNull(userSaved.getLastUpdatedBy());
