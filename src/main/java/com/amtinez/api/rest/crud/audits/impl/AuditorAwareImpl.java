@@ -1,6 +1,6 @@
-package com.amtinez.api.rest.crud.configurations;
+package com.amtinez.api.rest.crud.audits.impl;
 
-import com.amtinez.api.rest.crud.models.UserModel;
+import com.amtinez.api.rest.crud.security.impl.UserDetailsImpl;
 import com.amtinez.api.rest.crud.utils.UserUtils;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,8 +20,8 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor() {
-        final UserModel currentUser = (UserModel) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return Objects.nonNull(currentUser) ? Optional.of(UserUtils.getFullName(currentUser)) : Optional.empty();
+        final UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return Objects.nonNull(userDetails) ? Optional.of(UserUtils.getFullName(userDetails)) : Optional.empty();
     }
 
 }

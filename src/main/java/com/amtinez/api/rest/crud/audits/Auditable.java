@@ -1,4 +1,4 @@
-package com.amtinez.api.rest.crud.dtos;
+package com.amtinez.api.rest.crud.audits;
 
 import lombok.Getter;
 import lombok.Setter;

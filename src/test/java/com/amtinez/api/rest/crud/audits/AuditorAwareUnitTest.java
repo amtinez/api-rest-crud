@@ -1,6 +1,7 @@
-package com.amtinez.api.rest.crud.configurations;
+package com.amtinez.api.rest.crud.audits;
 
-import com.amtinez.api.rest.crud.models.UserModel;
+import com.amtinez.api.rest.crud.audits.impl.AuditorAwareImpl;
+import com.amtinez.api.rest.crud.security.impl.UserDetailsImpl;
 import com.amtinez.api.rest.crud.utils.UserUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,13 +22,13 @@ import static org.mockito.Mockito.when;
  * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AuditorAwareImplUnitTest {
+public class AuditorAwareUnitTest {
 
     private static final String FIRST_NAME = "userTestFirstName";
     private static final String LAST_NAME = "userTestLastName";
 
     @Mock
-    private UserModel userModel;
+    private UserDetailsImpl userDetails;
 
     @Mock
     private Authentication authentication;
@@ -46,12 +47,12 @@ public class AuditorAwareImplUnitTest {
 
     @Test
     public void testGetCurrentAuditor() {
-        when(userModel.getFirstName()).thenReturn(FIRST_NAME);
-        when(userModel.getLastName()).thenReturn(LAST_NAME);
-        when(authentication.getPrincipal()).thenReturn(userModel);
+        when(userDetails.getFirstName()).thenReturn(FIRST_NAME);
+        when(userDetails.getLastName()).thenReturn(LAST_NAME);
+        when(authentication.getPrincipal()).thenReturn(userDetails);
         final Optional<String> currentAuditorFullName = auditorAware.getCurrentAuditor();
         Assert.assertTrue(currentAuditorFullName.isPresent());
-        Assert.assertEquals(UserUtils.getFullName(userModel), currentAuditorFullName.get());
+        Assert.assertEquals(UserUtils.getFullName(userDetails), currentAuditorFullName.get());
     }
 
     @Test
