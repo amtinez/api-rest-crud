@@ -1,5 +1,6 @@
 package com.amtinez.api.rest.crud.dtos;
 
+import com.amtinez.api.rest.crud.audits.Auditable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Authority extends Auditable<String> {
+public class Role extends Auditable<String> {
 
     private Long id;
     private String name;
