@@ -1,6 +1,6 @@
 package com.amtinez.api.rest.crud.facades.impl;
 
-import com.amtinez.api.rest.crud.annotations.MockUser;
+import com.amtinez.api.rest.crud.annotations.WithMockAdminUser;
 import com.amtinez.api.rest.crud.constants.ConfigurationConstants.Profiles;
 import com.amtinez.api.rest.crud.dtos.Role;
 import com.amtinez.api.rest.crud.facades.RoleFacade;
@@ -28,7 +28,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 @ActiveProfiles(Profiles.TEST)
 @Transactional
-@MockUser
+@WithMockAdminUser
 public class RoleFacadeIntegrationTest {
 
     private static final Long EXISTING_ID = 1L;

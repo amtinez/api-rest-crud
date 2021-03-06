@@ -1,6 +1,6 @@
 package com.amtinez.api.rest.crud.services.impl;
 
-import com.amtinez.api.rest.crud.annotations.MockUser;
+import com.amtinez.api.rest.crud.annotations.WithMockAdminUser;
 import com.amtinez.api.rest.crud.constants.ConfigurationConstants.Profiles;
 import com.amtinez.api.rest.crud.models.RoleModel;
 import com.amtinez.api.rest.crud.services.RoleService;
@@ -28,10 +28,8 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 @ActiveProfiles(Profiles.TEST)
 @Transactional
-@MockUser
+@WithMockAdminUser
 public class RoleServiceIntegrationTest {
-
-    //TODO - IN OTHER TASK - MORE TEST - DATABASE VALIDATIONS
 
     private static final Long EXISTING_ID = 1L;
     private static final String EXISTING_NAME = "Role_One";
