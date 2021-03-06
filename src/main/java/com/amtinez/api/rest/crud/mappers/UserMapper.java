@@ -17,6 +17,8 @@ import java.util.Set;
 
 import static com.amtinez.api.rest.crud.constants.MapperConstants.SPRING_COMPONENT_MODEL;
 import static com.amtinez.api.rest.crud.constants.MapperConstants.User.CURRENT_LOCAL_DATE_TIME;
+import static com.amtinez.api.rest.crud.constants.MapperConstants.User.DISABLE_USER_BY_DEFAULT;
+import static com.amtinez.api.rest.crud.constants.MapperConstants.User.ENABLED_PROPERTY;
 import static com.amtinez.api.rest.crud.constants.MapperConstants.User.ENCRYPT_PASSWORD;
 import static com.amtinez.api.rest.crud.constants.MapperConstants.User.LAST_ACCESS_DATE_PROPERTY;
 import static com.amtinez.api.rest.crud.constants.MapperConstants.User.LAST_PASSWORD_UPDATE_PROPERTY;
@@ -52,6 +54,7 @@ public interface UserMapper {
     @Mapping(target = USERS_PROPERTY, ignore = true)
     RoleModel roleToRoleModelWithoutUsers(final Role role);
 
+    @Mapping(target = ENABLED_PROPERTY, expression = DISABLE_USER_BY_DEFAULT)
     @Mapping(target = LAST_ACCESS_DATE_PROPERTY, expression = CURRENT_LOCAL_DATE_TIME)
     @Mapping(target = LAST_PASSWORD_UPDATE_PROPERTY, expression = CURRENT_LOCAL_DATE_TIME)
     @Mapping(target = PASSWORD_PROPERTY, source = PASSWORD_PROPERTY, qualifiedByName = ENCRYPT_PASSWORD)
