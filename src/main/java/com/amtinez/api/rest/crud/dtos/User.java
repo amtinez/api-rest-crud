@@ -2,6 +2,10 @@ package com.amtinez.api.rest.crud.dtos;
 
 import com.amtinez.api.rest.crud.annotations.UniqueUserEmail;
 import com.amtinez.api.rest.crud.audits.Auditable;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,6 +56,8 @@ public class User extends Auditable<String> {
     private String password;
 
     @NotNull
+    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime birthdayDate;
 
     private String lockedBy;
