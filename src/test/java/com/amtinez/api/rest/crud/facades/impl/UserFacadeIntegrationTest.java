@@ -1,6 +1,6 @@
 package com.amtinez.api.rest.crud.facades.impl;
 
-import com.amtinez.api.rest.crud.annotations.MockUser;
+import com.amtinez.api.rest.crud.annotations.WithMockAdminUser;
 import com.amtinez.api.rest.crud.constants.ConfigurationConstants.Profiles;
 import com.amtinez.api.rest.crud.dtos.Role;
 import com.amtinez.api.rest.crud.dtos.User;
@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 @ActiveProfiles(Profiles.TEST)
 @Transactional
-@MockUser
+@WithMockAdminUser
 public class UserFacadeIntegrationTest {
 
     private static final Long EXISTING_ID_ONE = 1L;
@@ -52,6 +53,9 @@ public class UserFacadeIntegrationTest {
     private static final int USER_ROLE_LIST_SIZE = 1;
 
     private static final Long ROLE_EXISTING_ID = 1L;
+
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
     @Resource
     private UserFacade userFacade;

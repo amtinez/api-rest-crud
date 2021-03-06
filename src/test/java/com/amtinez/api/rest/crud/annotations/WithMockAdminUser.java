@@ -13,9 +13,9 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @WithSecurityContext(factory = MockUserSecurityContextFactory.class)
-public @interface MockUser {
+public @interface WithMockAdminUser {
 
-    String username() default "mockFirstName";
+    String username() default "mockFirstName@mockFirstName.com";
 
     String name() default "mockFirstName mockLastName";
 

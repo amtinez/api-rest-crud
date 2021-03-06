@@ -7,6 +7,7 @@ import com.amtinez.api.rest.crud.models.UserModel;
 import com.amtinez.api.rest.crud.services.UserService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,9 @@ public class UserFacadeImpl implements UserFacade {
     private UserService userService;
 
     @Resource
+    private PasswordEncoder passwordEncoder;
+
+    @Resource
     private AuditorAware<String> auditorAware;
 
     @Override
@@ -43,10 +47,7 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public User registerUser(final User user) {
-        final UserModel userModel = userMapper.userToUserModel(user);
-        userModel.setEnabled(Boolean.FALSE);
-        userModel.setLastAccessDate(LocalDateTime.now());
-        userModel.setLastPasswordUpdateDate(LocalDateTime.now());
+        final UserModel userModel = userMapper.userToUserModelRegisterStep(user, passwordEncoder);
         return userMapper.userModelToUser(userService.saveUser(userModel));
     }
 

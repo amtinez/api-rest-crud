@@ -18,6 +18,7 @@ public class UserUtilsUnitTest {
 
     private static final String USER_FIRST_NAME = "testFirstName";
     private static final String USER_LAST_NAME = "testLastName";
+    private static final String USER_FULL_NAME = String.format("%s %s", USER_FIRST_NAME, USER_LAST_NAME);
 
     @Mock
     private UserDetailsImpl userDetails;
@@ -30,7 +31,17 @@ public class UserUtilsUnitTest {
 
     @Test
     public void testGetFullName() {
-        assertEquals(String.format("%s %s", USER_FIRST_NAME, USER_LAST_NAME), UserUtils.getFullName(userDetails));
+        assertEquals(USER_FULL_NAME, UserUtils.getFullName(userDetails));
+    }
+
+    @Test
+    public void testGetPrincipalFullName() {
+        assertEquals(USER_FULL_NAME, UserUtils.getPrincipalFullName(userDetails));
+    }
+
+    @Test
+    public void testGetPrincipalFullNameAnonymousUser() {
+        assertEquals(UserUtils.ANONYMOUS_USER, UserUtils.getPrincipalFullName(USER_FIRST_NAME));
     }
 
 }
