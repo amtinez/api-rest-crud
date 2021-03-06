@@ -9,11 +9,16 @@ public class MapperConstants {
 
     public static class User {
 
-        public static final String PASSWORD_PROPERTY = "password";
         public static final String USERS_PROPERTY = "users";
+        public static final String PASSWORD_PROPERTY = "password";
+        public static final String LAST_ACCESS_DATE_PROPERTY = "lastAccessDate";
+        public static final String LAST_PASSWORD_UPDATE_PROPERTY = "lastPasswordUpdateDate";
 
+        public static final String ENCRYPT_PASSWORD = "encryptPassword";
         public static final String ROLE_MODEL_TO_ROLE_WITHOUT_USERS = "roleModelToRoleWithoutUsers";
         public static final String ROLE_TO_ROLE_MODEL_WITHOUT_USERS = "roleToRoleModelWithoutUsers";
+
+        public static final String CURRENT_LOCAL_DATE_TIME = "java(LocalDateTime.now())";
 
         private User() {
         }
