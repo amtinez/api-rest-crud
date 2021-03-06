@@ -95,7 +95,7 @@ public class UserFacadeIntegrationTest {
         assertEquals(FIRST_NAME, userSaved.getFirstName());
         assertEquals(LAST_NAME, userSaved.getLastName());
         assertEquals(EMAIL, userSaved.getEmail());
-        assertEquals(passwordEncoder.encode(PASSWORD), userSaved.getPassword());
+        assertNull(userSaved.getPassword());
         assertEquals(localDateTimeNow, userSaved.getBirthdayDate());
         assertEquals(Boolean.FALSE, userSaved.getEnabled());
         assertEquals(USER_ROLE_LIST_SIZE, userSaved.getRoles().size());
