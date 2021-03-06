@@ -9,12 +9,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +30,7 @@ public class UserMapperUnitTest {
     private static final Long USER_ID = 1L;
     private static final String USER_FIRST_NAME = "testFirstName";
     private static final String USER_LAST_NAME = "testLastName";
+    private static final String USER_PASSWORD = "testPassword";
     private static final String USER_EMAIL = "test@email.com";
     private static final LocalDateTime USER_BIRTHDAY_DATE = LocalDateTime.now();
     private static final String USER_LOCKED_BY = String.format("%s %s", USER_FIRST_NAME, USER_LAST_NAME);
@@ -50,6 +54,7 @@ public class UserMapperUnitTest {
     @Mock
     private Role role;
 
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final UserMapper mapper = new UserMapperImpl();
 
     @Before
@@ -70,6 +75,7 @@ public class UserMapperUnitTest {
         when(user.getId()).thenReturn(USER_ID);
         when(user.getFirstName()).thenReturn(USER_FIRST_NAME);
         when(user.getLastName()).thenReturn(USER_LAST_NAME);
+        when(user.getPassword()).thenReturn(USER_PASSWORD);
         when(user.getEmail()).thenReturn(USER_EMAIL);
         when(user.getBirthdayDate()).thenReturn(USER_BIRTHDAY_DATE);
         when(user.getLockedBy()).thenReturn(USER_LOCKED_BY);
@@ -150,6 +156,35 @@ public class UserMapperUnitTest {
     @Test
     public void nullDtoToModel() {
         assertNull(mapper.userToUserModel(null));
+    }
+
+    @Test
+    public void dtoToModelRegisterStep() {
+        UserModel userModel = mapper.userToUserModelRegisterStep(user, passwordEncoder);
+        assertEquals(USER_FIRST_NAME, userModel.getFirstName());
+        assertEquals(USER_LAST_NAME, userModel.getLastName());
+        assertNotEquals(USER_PASSWORD, userModel.getPassword());
+        assertEquals(USER_EMAIL, userModel.getEmail());
+        assertEquals(USER_BIRTHDAY_DATE, userModel.getBirthdayDate());
+        assertEquals(USER_LOCKED_BY, userModel.getLockedBy());
+        assertEquals(USER_LOCKED_DATE, userModel.getLockedDate());
+        assertEquals(USER_LOCKED_REASON, userModel.getLockedReason());
+        final Set<RoleModel> roles = userModel.getRoles();
+        assertEquals(USER_ROLES_SIZE, roles.size());
+        final RoleModel role = roles.iterator().next();
+        assertEquals(ROLE_ID, role.getId());
+        assertEquals(ROLE_NAME, role.getName());
+    }
+
+    @Test
+    public void nullDtoToModelRegisterStep() {
+        assertNull(mapper.userToUserModelRegisterStep(null, passwordEncoder));
+    }
+
+    @Test
+    public void dtoToModelRegisterStepNullPasswordEncoder() {
+        UserModel userModel = mapper.userToUserModelRegisterStep(user, null);
+        assertEquals(USER_PASSWORD, userModel.getPassword());
     }
 
 }
