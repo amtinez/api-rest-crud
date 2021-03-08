@@ -1,6 +1,11 @@
 package com.amtinez.api.rest.crud.dtos;
 
 import com.amtinez.api.rest.crud.annotations.UniqueUserEmail;
+import com.amtinez.api.rest.crud.audits.Auditable;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +26,7 @@ import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.LAST_
 import static com.amtinez.api.rest.crud.constants.ValidationConstants.User.PASSWORD_MAX_FIELD_LENGTH;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Builder
 @NoArgsConstructor
@@ -51,9 +56,18 @@ public class User extends Auditable<String> {
     private String password;
 
     @NotNull
+    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime birthdayDate;
 
+    private String lockedBy;
+
+    private LocalDateTime lockedDate;
+
+    private String lockedReason;
+
     private Boolean enabled;
-    private Set<Authority> authorities;
+
+    private Set<Role> roles;
 
 }

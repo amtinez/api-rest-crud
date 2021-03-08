@@ -1,7 +1,7 @@
 package com.amtinez.api.rest.crud.constants;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 public class DatabaseConstants {
 
@@ -19,7 +19,11 @@ public class DatabaseConstants {
             public static final String PASSWORD_FIELD = "password";
             public static final int PASSWORD_FIELD_LENGTH = 80;
             public static final String BIRTHDAY_DATE_FIELD = "birthday_date";
+            public static final String LOCKED_BY_FIELD = "locked_by";
+            public static final int LOCKED_BY_FIELD_LENGTH = 100;
             public static final String LOCKED_AT_FIELD = "locked_at";
+            public static final String LOCKED_REASON_FIELD = "locked_reason";
+            public static final int LOCKED_REASON_FIELD_LENGTH = 100;
             public static final String LAST_ACCESS_DATE_FIELD = "last_access_at";
             public static final String LAST_PASSWORD_UPDATE_DATE_FIELD = "last_password_update_at";
             public static final String ENABLED_FIELD = "enabled";
@@ -28,23 +32,23 @@ public class DatabaseConstants {
             }
         }
 
-        public static class Authority {
+        public static class Role {
 
-            public static final String TABLE_NAME = "authorities";
+            public static final String TABLE_NAME = "roles";
             public static final String NAME_FIELD = "name";
             public static final int NAME_FIELD_LENGTH = 50;
 
-            private Authority() {
+            private Role() {
             }
         }
 
-        public static class UsersAuthorities {
+        public static class UsersRoles {
 
-            public static final String TABLE_NAME = "users_authorities";
-            public static final String ID_AUTHORITY_FIELD = "id_authority";
+            public static final String TABLE_NAME = "users_roles";
+            public static final String ID_ROLE_FIELD = "id_role";
             public static final String ID_USER_FIELD = "id_user";
 
-            private UsersAuthorities() {
+            private UsersRoles() {
             }
         }
 

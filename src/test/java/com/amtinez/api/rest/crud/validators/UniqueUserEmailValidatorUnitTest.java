@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UniqueUserEmailValidatorUnitTest {

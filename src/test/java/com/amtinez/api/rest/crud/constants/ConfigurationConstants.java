@@ -1,7 +1,7 @@
 package com.amtinez.api.rest.crud.constants;
 
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 public class ConfigurationConstants {
 
@@ -11,10 +11,9 @@ public class ConfigurationConstants {
 
         private Profiles() {
         }
-
     }
 
     private ConfigurationConstants() {
-
     }
+
 }

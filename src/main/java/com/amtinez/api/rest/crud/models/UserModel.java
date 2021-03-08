@@ -1,16 +1,15 @@
 package com.amtinez.api.rest.crud.models;
 
+import com.amtinez.api.rest.crud.audits.AuditableModel;
 import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.User;
-import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.UsersAuthorities;
+import com.amtinez.api.rest.crud.constants.DatabaseConstants.Table.UsersRoles;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,11 +24,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import static com.amtinez.api.rest.crud.constants.SecurityConstants.INACTIVE_LIFETIME_MONTHS;
-import static com.amtinez.api.rest.crud.constants.SecurityConstants.PASSWORD_LIFETIME_MONTHS;
-
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Builder
 @Getter
@@ -38,7 +34,7 @@ import static com.amtinez.api.rest.crud.constants.SecurityConstants.PASSWORD_LIF
 @AllArgsConstructor
 @Entity
 @Table(name = User.TABLE_NAME)
-public class UserModel extends AuditableModel<String> implements UserDetails {
+public class UserModel extends AuditableModel<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,9 +55,14 @@ public class UserModel extends AuditableModel<String> implements UserDetails {
     @Column(name = User.BIRTHDAY_DATE_FIELD, nullable = false)
     private LocalDateTime birthdayDate;
 
-    //TODO: IMPLEMENT THE BLOCKING REASON AND WHO BLOCKED IT
+    @Column(name = User.LOCKED_BY_FIELD, length = User.LOCKED_BY_FIELD_LENGTH)
+    private String lockedBy;
+
     @Column(name = User.LOCKED_AT_FIELD)
     private LocalDateTime lockedDate;
+
+    @Column(name = User.LOCKED_REASON_FIELD, length = User.LOCKED_REASON_FIELD_LENGTH)
+    private String lockedReason;
 
     @Column(name = User.LAST_ACCESS_DATE_FIELD)
     private LocalDateTime lastAccessDate;
@@ -74,39 +75,9 @@ public class UserModel extends AuditableModel<String> implements UserDetails {
 
     @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = UsersAuthorities.TABLE_NAME,
-               joinColumns = {@JoinColumn(name = UsersAuthorities.ID_USER_FIELD)},
-               inverseJoinColumns = {@JoinColumn(name = UsersAuthorities.ID_AUTHORITY_FIELD)})
-    private Set<AuthorityModel> authorities = new HashSet<>(0);
-
-    @Override
-    public Set<AuthorityModel> getAuthorities() {
-        return this.authorities;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return ChronoUnit.MONTHS.between(this.lastAccessDate, LocalDateTime.now()) < INACTIVE_LIFETIME_MONTHS;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return this.lockedDate == null;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return ChronoUnit.MONTHS.between(this.lastPasswordUpdateDate, LocalDateTime.now()) < PASSWORD_LIFETIME_MONTHS;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.enabled;
-    }
+    @JoinTable(name = UsersRoles.TABLE_NAME,
+               joinColumns = {@JoinColumn(name = UsersRoles.ID_USER_FIELD)},
+               inverseJoinColumns = {@JoinColumn(name = UsersRoles.ID_ROLE_FIELD)})
+    private Set<RoleModel> roles = new HashSet<>(0);
 
 }

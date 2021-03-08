@@ -3,19 +3,16 @@ package com.amtinez.api.rest.crud.services.impl;
 import com.amtinez.api.rest.crud.daos.UserDao;
 import com.amtinez.api.rest.crud.models.UserModel;
 import com.amtinez.api.rest.crud.services.UserService;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
 
-import static com.amtinez.api.rest.crud.constants.SecurityConstants.USER_EMAIL_NOT_FOUND;
-
 /**
- * @author amartinezcerro@gmail.com
+ * @author Alejandro Martínez Cerro <amartinezcerro @ gmail.com>
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,9 +46,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(final String email) {
-        final Optional<UserModel> user = Optional.ofNullable(userDao.findByEmail(email));
-        return user.orElseThrow(() -> new UsernameNotFoundException(String.format(USER_EMAIL_NOT_FOUND, email)));
+    public int updateUserEnabledStatus(final Long id, final Boolean enabled) {
+        return userDao.updateEnabledStatusById(id, enabled);
+    }
+
+    @Override
+    public int updateUserLockedInformation(final Long id,
+                                           final String lockedBy,
+                                           final LocalDateTime lockedDate,
+                                           final String lockedReason) {
+        return userDao.updateLockedInformationById(id, lockedBy, lockedDate, lockedReason);
     }
 
 }
