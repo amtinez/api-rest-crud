@@ -1,10 +1,11 @@
 # API Rest CRUD
 
-API Rest CRUD with OAuth2
+The API Rest CRUD project was born with the aim of learning and deepening on a RESTful application based on user management and security, which from my point of view is one of the most important and critical parts. The project management is being done through the Jira tool based on the Kanban methodology. This project is developed in Spring Boot and I am using all the good practices that I have learned during my working life.
 
 ## Requirements
 
 - Java 11
+- Docker
 
 **Tip:** Install java tools using [SDKMAN](https://sdkman.io).
 
@@ -31,6 +32,8 @@ PROJECT_PATH=[YOUR PROJECT PATH]
 
 ## Sonarqube
 
+![Code quality](sonarqube/code-quality.png)
+
 The first time we start Sonarqube we must change the password of the following default user:
 
     sonar.login=admin
@@ -43,4 +46,4 @@ following property inside the ```~/.gradle/gradle.properties``` file:
 
 ## EER Diagram
 
-![EER Diagram](database/EER-Diagram.png)
+![EER Diagram](database/EER-diagram.png)
